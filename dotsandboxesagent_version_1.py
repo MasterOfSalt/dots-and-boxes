@@ -73,15 +73,7 @@ class DotsAndBoxesAgent:
         logger.info("Computing next move (grid={}x{}, player={})"\
                 .format(self.board.nb_rows, self.board.nb_cols, self.player))
         # Random move
-        free_lines = []
-        for ri in range(len(self.board.cells)):
-            row = self.board.cells[ri]
-            for ci in range(len(row)):
-                cell = row[ci]
-                if ri < (len(self.board.cells) - 1) and cell["v"] == 0:
-                    free_lines.append((ri, ci, "v"))
-                if ci < (len(row) - 1) and cell["h"] == 0:
-                    free_lines.append((ri, ci, "h"))
+        free_lines = self.board.free_lines()
         if len(free_lines) == 0:
             # Board full
             return None
