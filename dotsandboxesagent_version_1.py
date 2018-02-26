@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # encoding: utf-8
+from board import Board
 """
 dotsandboxesagent.py
 
@@ -46,29 +47,23 @@ class DotsAndBoxesAgent:
         self.player = {player}
         self.timelimit = timelimit
         self.ended = False
-        self.nb_rows = nb_rows
-        self.nb_cols = nb_cols
-        rows = []
-        for ri in range(nb_rows + 1):
-            columns = []
-            for ci in range(nb_cols + 1):
-                columns.append({"v":0, "h":0})
-            rows.append(columns)
-        self.cells = rows
+        self.board = Board(nb_rows,nb_cols)
+
+
 
     def add_player(self, player):
         """Use the same agent for multiple players."""
         self.player.add(player)
 
     def register_action(self, row, column, orientation, player):
-        """Register action played in game.
-
+        """
+        Register action played in game.
         :param row:
         :param columns:
         :param orientation: "v" or "h"
         :param player: 1 or 2
         """
-        self.cells[row][column][orientation] = player
+        self.board.cells[row][column][orientation] = player
 
     def next_action(self):
         """Return the next action this agent wants to perform.
@@ -76,14 +71,14 @@ class DotsAndBoxesAgent:
         :return: (row, column, orientation)
         """
         logger.info("Computing next move (grid={}x{}, player={})"\
-                .format(self.nb_rows, self.nb_cols, self.player))
+                .format(self.board.nb_rows, self.board.nb_cols, self.player))
         # Random move
         free_lines = []
-        for ri in range(len(self.cells)):
-            row = self.cells[ri]
+        for ri in range(len(self.board.cells)):
+            row = self.board.cells[ri]
             for ci in range(len(row)):
                 cell = row[ci]
-                if ri < (len(self.cells) - 1) and cell["v"] == 0:
+                if ri < (len(self.board.cells) - 1) and cell["v"] == 0:
                     free_lines.append((ri, ci, "v"))
                 if ci < (len(row) - 1) and cell["h"] == 0:
                     free_lines.append((ri, ci, "h"))
@@ -93,7 +88,6 @@ class DotsAndBoxesAgent:
         movei = random.randint(0, len(free_lines) - 1)
         r, c, o = free_lines[movei]
         return r, c, o
-
     def end_game(self):
         self.ended = True
 
