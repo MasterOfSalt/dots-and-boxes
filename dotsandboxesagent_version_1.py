@@ -63,7 +63,7 @@ class DotsAndBoxesAgent:
         :param orientation: "v" or "h"
         :param player: 1 or 2
         """
-        self.board.cells[row][column][orientation] = player
+        self.board.fill_line(row,column,orientation,player)
 
     def next_action(self):
         """Return the next action this agent wants to perform.
