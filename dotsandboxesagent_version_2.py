@@ -44,6 +44,7 @@ class DotsAndBoxesAgent:
         :param nb_rows: Rows in grid
         :param nb_cols: Columns in grid
         :param timelimit: Maximum time allowed to send a next action.
+        :param odds, evens: used to convert to and from string-and-point boards  
         """
         self.player = {player}
         self.timelimit = timelimit
@@ -51,6 +52,8 @@ class DotsAndBoxesAgent:
         self.board = Coins_strings_board(nb_rows+1,nb_cols+1)
         self.odds = []
         self.evens = []
+        
+       # //TODO dynamic board size 
         i = 0
         while i<120:
             if(i%2==0):
@@ -99,7 +102,7 @@ class DotsAndBoxesAgent:
         if len(free_lines) == 0:
             # Board full
             return None
-        (a,b,score) = abv1.alphabeta(self.board,depth = 10,player = list(self.player)[0])
+        (a,b,score) = abv1.alphabeta(self.board,depth = 4,player = list(self.player)[0])
         if a%2==0:
             x = self.odds.index(b)
             y = self.evens.index(a)
