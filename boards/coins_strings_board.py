@@ -34,46 +34,57 @@ class Coins_strings_board:
         """method description
         :param _name_: _explanation
         """
-        self.board[x * self.dimensions[1] + y] = True
+        self.board[self.position_on_board(x,y)] = True
         self.available_moves.remove((x,y))
-        return self._close_box(x,y,player)
+        return self.calc_score_for_set_line(x,y,player)
 
-
-    def _close_box(self,x,y,player):
+    def score(self,x,y,player):
         """method description
         :param _name_: _explanation
         """
-        completed = False
-        if x % 2 == 1: # horizontal
-            if y - 2 >= 0 and self.board[x * self.dimensions[1] + y] and self.board[x * self.dimensions[1] + y - 2] and self.board[(x - 1) * self.dimensions[1] + y - 1] and self.board[(x + 1) * self.dimensions[1] + y - 1]:
-                completed = True
-                self.boxes[player-1] += 1
-                self.board[x * self.dimensions[1] + y - 1] = player
-            if (y + 2 < self.dimensions[1]) and self.board[x * self.dimensions[1] + y] and self.board[x * self.dimensions[1] + y + 2] and self.board[(x - 1) * self.dimensions[1] + y + 1]  and self.board[(x + 1) * self.dimensions[1] + y + 1]:
-                completed = True
-                self.boxes[player-1] += 1
-                self.board[x * self.dimensions[1] + y + 1] = player
-        else:
-            if x - 2 >= 0 and self.board[x * self.dimensions[1] + y] and self.board[(x - 2) * self.dimensions[1] + y] and self.board[(x - 1) * self.dimensions[1] + y - 1] and self.board[(x - 1) * self.dimensions[1] + y + 1]:
-                completed = True
-                self.boxes[player-1] += 1
-                self.board[(x - 1) * self.dimensions[1] + y] = player
-            if (x + 2 < self.dimensions[0]) and self.board[x * self.dimensions[1] + y] and self.board[(x + 2) * self.dimensions[1] + y] and self.board[(x + 1) * self.dimensions[1] + y - 1] and self.board[(x + 1) * self.dimensions[1] + y + 1]:
-                completed = True
-                self.boxes[player-1] += 1
-                self.board[(x + 1) * self.dimensions[1] + y] = player
-        return completed
+        self.boxes[player-1] += 1
+        self.board[self.position_on_board(x,y-1)] = player
 
+    def position_on_board(self,x,y):
+        """method description
+        :param _name_: _explanation
+        """
+        return (x * self.dimensions[1] + y)
+    def calc_score_for_set_line(self,x,y,player):
+        """When a line is set this function detects if the player scored any points and adds them to the scoreboard
+        :param _name_: _explanation
+        """
+        playagain = False
+        pos = self.position_on_board(x,y)
+        pos_1_to_left = self.position_on_board((x-1),y)
+        pos_1_to_right = self.position_on_board((x+1),y)
+        pos_2_to_left = self.position_on_board((x-2),y)
+        pos_2_to_right = self.position_on_board((x+2),y)
+        if x % 2 == 1:
+            if y - 2 >= 0 and self.board[pos] and self.board[pos - 2] and self.board[pos_1_to_left - 1] and self.board[pos_1_to_right - 1]:
+                playagain = True
+                self.score(x,y,player)
+            if (y + 2 < self.dimensions[1]) and self.board[pos] and self.board[pos + 2] and self.board[pos_1_to_left + 1]  and self.board[pos_1_to_right + 1]:
+                playagain = True
+                self.score(x,y,player)
+        else:
+            if x - 2 >= 0 and self.board[pos] and self.board[pos_2_to_left] and self.board[pos_1_to_left - 1] and self.board[pos_1_to_left + 1]:
+                playagain = True
+                self.score(x,y,player)
+            if (x + 2 < self.dimensions[0]) and self.board[pos] and self.board[pos_2_to_right] and self.board[pos_1_to_right - 1] and self.board[pos_1_to_right+ 1]:
+                playagain = True
+                self.score(x,y,player)
+        return playagain
 
 
     def copy(self):
         """method description
         :param _name_: _explanation
         """
-        dab = Coins_strings_board()
-        dab.dimensions = self.dimensions
+        csb = Coins_strings_board()
+        csb.dimensions = self.dimensions
         #shallow copies
-        dab.board = self.board[:]
-        dab.available_moves = self.available_moves[:]
-        dab.boxes = self.boxes[:]
-        return dab
+        csb.board = self.board[:]
+        csb.available_moves = self.available_moves[:]
+        csb.boxes = self.boxes[:]
+        return csb

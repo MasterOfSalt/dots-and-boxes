@@ -95,7 +95,6 @@ class DotsAndBoxesAgent:
         #         .format(self.board.nb_rows, self.board.nb_cols, self.player))
 
         free_lines = self.board.free_lines()
-        print (free_lines)
         if len(free_lines) == 0:
             # Board full
             return None
@@ -103,12 +102,10 @@ class DotsAndBoxesAgent:
         if a%2==0:
             x = self.odds.index(b)
             y = self.evens.index(a)
-            print("robot played H:",x,y)
             return (y,x,"h")
         else:
             y = self.odds.index(a)
             x = self.evens.index(b)
-            print("robot played V:",x,y)
             return (y,x,"v")
     def end_game(self):
         self.ended = True
