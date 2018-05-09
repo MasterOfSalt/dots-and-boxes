@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-from version2.coins_strings_board import Coins_strings_board
+from boards.coins_strings_board import Coins_strings_board
 import version2.alpha_beta_v1 as abv1
 """
 dotsandboxesagent.py

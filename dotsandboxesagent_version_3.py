@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-from version3.strings_board import Strings_board
+from boards.strings_board import Strings_board
 import version3.heuristics as heuristics
 """
 dotsandboxesagent.py

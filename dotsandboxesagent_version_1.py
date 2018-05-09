@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-from board import Board
+from boards.board import Board
 """
 dotsandboxesagent.py
 
