@@ -12,11 +12,6 @@ def get_first_completing_move(board):
                 return (xc[ind],yc[ind])
     return(False)
 
-def get_random_move(board):
-    potential_moves = board.get_potential_moves()
-    ind = randint(0,len(potential_moves)-1)
-    return(potential_moves[ind])
-
 def always4never3(board):
     move = get_first_completing_move(board)
     if move:

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-from boards.board import Board
 """
 dotsandboxesagent.py
 
@@ -17,7 +16,7 @@ import websockets
 import json
 from collections import defaultdict
 import random
-
+from boards.board import Board
 
 logger = logging.getLogger(__name__)
 games = {}
