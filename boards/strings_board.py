@@ -1,6 +1,17 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+"""
+strings_board.py
+
+__ for the Machine Learning Project course at KU Leuven (2017-2018)
+
+"""
 class Strings_board:
     def __init__(self,nb_rows=0,nb_cols=0):
-        #rows en cols in #dots
+        """Create board that only uses strings for its represenation.
+        :param nb_rows: Rows in grid
+        :param nb_cols: Columns in grid
+        """
         even = [False for i in range(nb_cols)]
         odd = [False for i in range(nb_cols+1)]
         self.board = []
@@ -12,8 +23,14 @@ class Strings_board:
             else:
                 self.board.append(odd[:])
     def fill_line(self,x,y):
+        """method description
+        :param _name_: _explanation
+        """
         self.board[x][y] = True
     def closest_free(self,x, y):
+        """method description
+        :param _name_: _explanation
+        """
         def distance(x1, y1, x2, y2):
             from math import sqrt
             return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
@@ -30,12 +47,18 @@ class Strings_board:
         return distances[0][1:]
 
     def first_available_move(self):
+        """method description
+        :param _name_: _explanation
+        """
         try:
             return closest_free(self.board, 0, 0)
         except IndexError:
             return False
 
     def get_potential_moves(self):
+        """method description
+        :param _name_: _explanation
+        """
         potential_moves = []
         for i, row in enumerate(self.board):
             for j, val in enumerate(row):
@@ -44,6 +67,9 @@ class Strings_board:
         return(potential_moves)
 
     def get_edges(self,square):
+        """method description
+        :param _name_: _explanation
+        """
         #for square (i,j) returns the 4-tuple of 0-1 for the edges of this square
         # ordered(top,left,right,bottom)
         i,j = square
@@ -57,6 +83,9 @@ class Strings_board:
         return(sq_edges)
 
     def check_surrounding_squares(self,edge,k):
+        """method description
+        :param _name_: _explanation
+        """
         # will check if any of the surrounding squares has k or more edges
         # (apart from edge), i.e. k=3 will check for squares to be completet with edge
         # will return number of such squares (0-4)
