@@ -101,7 +101,7 @@ class DotsAndBoxesAgent:
         if len(free_lines) == 0:
             # Board full
             return None
-        (a,b,score) = abv1.alphabeta(self.board,depth = 3,player = list(self.player)[0])
+        (a,b,score) = abv1.alphabeta(self.board,depth = 10,player = list(self.player)[0])
 
         if a%2==0:
             x = self.odds.index(b)

@@ -85,7 +85,6 @@ class DotsAndBoxesAgent:
         if len(free_lines) == 0:
             # Board full
             return None
-        # Random move
         (a,b) = heuristics.always4never3(self.board)
         if a%2==0:
             o = "h"

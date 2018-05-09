@@ -53,6 +53,7 @@ class Coins_strings_board:
     def calc_score_for_set_line(self,x,y,player):
         """When a line is set this function detects if the player scored any points and adds them to the scoreboard
         :param _name_: _explanation
+        :return: true or false if said move completes a box
         """
         playagain = False
         pos = self.position_on_board(x,y)

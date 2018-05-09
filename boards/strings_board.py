@@ -24,7 +24,7 @@ class Strings_board:
                 self.board.append(odd[:])
     def fill_line(self,x,y):
         """method description
-        :param _name_: _explanation
+        :param x: _explanation
         """
         self.board[x][y] = True
     def closest_free(self,x, y):
