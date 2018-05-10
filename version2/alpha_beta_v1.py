@@ -1,3 +1,4 @@
+import pickle as p
 inf = float("inf")
 
 def alphabeta(board, depth=10, alpha = -inf, beta = inf, is_max = True, player = True, move = (0,0)):
@@ -13,6 +14,12 @@ def alphabeta(board, depth=10, alpha = -inf, beta = inf, is_max = True, player =
         for x, y in children:
             current = board.copy()
             turn = current.fill_line(x, y, player)
+            
+            currentBestMove = (best_move_x,best_move_y,best_score)
+       
+            with open('outfile', 'wb') as fp:
+                p.dump(currentBestMove,fp)
+                
             (a,b,score) = alphabeta(current, depth - 1, alpha, beta, turn, player, (x,y))
             if score > best_score:
                 best_move = (x,y)
