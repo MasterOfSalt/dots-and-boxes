@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 from boards.coins_strings_board import Coins_strings_board
+from timeout import timeout
 import version2.alpha_beta_v1 as abv1
+
+     
 """
 dotsandboxesagent.py
 
@@ -89,6 +92,10 @@ class DotsAndBoxesAgent:
             b = self.evens[x]
         self.board.fill_line(a,b,player)
 
+    #def calc_mini_max():
+    #    return abv1.alphabeta(self.board,depth=4,player = list(self.player)[0])
+        
+    @timeout(3)
     def next_action(self):
         """Return the next action this agent wants to perform.
         :return: (row, col, orientation)
@@ -101,7 +108,15 @@ class DotsAndBoxesAgent:
         if len(free_lines) == 0:
             # Board full
             return None
-        (a,b,score) = abv1.alphabeta(self.board,depth = 10,player = list(self.player)[0])
+        (a,b,score) = abv1.alphabeta(self.board,depth = 9,player = list(self.player)[0])
+        
+        '''
+        except TimedOutExc as e:
+            print ("took too long")
+            with open ('outfile','rb') as fp:
+                currentBestMove = pickle.load(fp)
+                return currentBestMove
+        '''
 
         if a%2==0:
             x = self.odds.index(b)
@@ -111,12 +126,14 @@ class DotsAndBoxesAgent:
             y = self.odds.index(a)
             x = self.evens.index(b)
             return (y,x,"v")
+        
     def end_game(self):
         self.ended = True
 
 
+        
+        
 ## MAIN EVENT LOOP
-
 async def handler(websocket, path):
     logger.info("Start listening")
     game = None
