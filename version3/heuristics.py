@@ -1,5 +1,8 @@
 from random import randint
 def get_first_completing_move(board):
+    """method description
+    :param x: _explanation
+    """
     # returns completing move, if exists
     # otherwise returns False
     for i in range(board.nb_rows-1):
@@ -13,6 +16,9 @@ def get_first_completing_move(board):
     return(False)
 
 def always4never3(board):
+    """method description
+    :param x: _explanation
+    """
     move = get_first_completing_move(board)
     if move:
         return(move)
