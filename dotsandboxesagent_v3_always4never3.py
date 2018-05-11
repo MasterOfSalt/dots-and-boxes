@@ -49,6 +49,7 @@ class DotsAndBoxesAgent:
         self.timelimit = timelimit
         self.ended = False
         self.board = Strings_board(nb_rows,nb_cols)
+        
         self.odds = []
         i = 0
         while i<120:
