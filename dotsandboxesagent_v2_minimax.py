@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 from boards.coins_strings_board import Coins_strings_board
-from timeout import timeout
 import version2.alpha_beta_v1 as abv1
 
-     
+
 """
 dotsandboxesagent.py
 
@@ -56,7 +55,6 @@ class DotsAndBoxesAgent:
         self.odds = []
         self.evens = []
 
-       # //TODO dynamic board size
         i = 0
         while i<120:
             if(i%2==0):
@@ -92,14 +90,10 @@ class DotsAndBoxesAgent:
             b = self.evens[x]
         self.board.fill_line(a,b,player)
 
-    #def calc_mini_max():
-    #    return abv1.alphabeta(self.board,depth=4,player = list(self.player)[0])
-        
-    @timeout(3)
     def next_action(self):
         """Return the next action this agent wants to perform.
-        :return: (row, col, orientation)
-        :return: (y, x, orientation)
+        :return: (row, col, orientation) [EQUIVALENT]
+        :return: (y, x, orientation) [EQUIVALENT]
         """
         # logger.info("Computing next move (grid={}x{}, player={})"\
         #         .format(self.board.nb_rows, self.board.nb_cols, self.player))
@@ -109,14 +103,6 @@ class DotsAndBoxesAgent:
             # Board full
             return None
         (a,b,score) = abv1.alphabeta(self.board,depth = 9,player = list(self.player)[0])
-        
-        '''
-        except TimedOutExc as e:
-            print ("took too long")
-            with open ('outfile','rb') as fp:
-                currentBestMove = pickle.load(fp)
-                return currentBestMove
-        '''
 
         if a%2==0:
             x = self.odds.index(b)
@@ -126,13 +112,13 @@ class DotsAndBoxesAgent:
             y = self.odds.index(a)
             x = self.evens.index(b)
             return (y,x,"v")
-        
+
     def end_game(self):
         self.ended = True
 
 
-        
-        
+
+
 ## MAIN EVENT LOOP
 async def handler(websocket, path):
     logger.info("Start listening")
