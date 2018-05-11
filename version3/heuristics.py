@@ -25,7 +25,6 @@ def always4never3(board):
                 # check for 2 edged  surroundung squares
                 tmp = board.check_surrounding_squares((i,j),2)
                 if not tmp: potential_moves_not3.append((i,j))
-
     if not potential_moves:
         return(False)
     else:

@@ -38,8 +38,7 @@ class Strings_board:
         for i,row in enumerate(self.board):
             for j,val in enumerate(row):
                 if val == False:
-                    distances.append((distance(x, y, i, j), i, j))
-
+                    distances.append((distance(x,y,i,j),i,j))
         if len(distances) == 0:
             return False
 
@@ -74,7 +73,7 @@ class Strings_board:
         # ordered(top,left,right,bottom)
         i,j = square
         i = int(i)
-        j = int(j   )
+        j = int(j)
         sq_edges = [self.board[i * 2][j],     # top
           self.board[i * 2 + 1][j],      # left
           self.board[i * 2 + 1][j + 1],  # right

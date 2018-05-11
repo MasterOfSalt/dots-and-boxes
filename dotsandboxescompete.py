@@ -19,13 +19,12 @@ from collections import defaultdict
 import random
 import uuid
 import time
-
+import csv
 logger = logging.getLogger(__name__)
 
 
 def start_competition(address1, address2, nb_rows, nb_cols, timelimit):
    asyncio.get_event_loop().run_until_complete(connect_agent(address1, address2, nb_rows, nb_cols, timelimit))
-
 
 async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
     cur_game = str(uuid.uuid4())
@@ -118,6 +117,29 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                 "orientation": o,
                 "winner": winner
             }
+            f = open('data.csv', 'a')
+            writer = csv.writer(f)
+            player1 = "player1"
+            player2 = "player2"
+            if uri1 == "ws://localhost:2001":
+                player1 = "V1:RANDOM"
+            if uri1 == "ws://localhost:2002":
+                player1 = "V2:ALPHABETA"
+            if uri1 == "ws://localhost:2003":
+                player1 = "V3:HEURISTIC"
+            if uri2 == "ws://localhost:2001":
+                player2 = "V1:RANDOM"
+            if uri2 == "ws://localhost:2002":
+                player2 = "V2:ALPHABETA"
+            if uri2 == "ws://localhost:2003":
+                player2 = "V3:HEURISTIC"
+            if winner == 1:
+                winnerstring = player1
+            else:
+                winnerstring = player2
+            dimension = str(nb_rows)+"x"+str(nb_cols)
+            row = [player1,player2,winnerstring,dimension]
+            writer.writerow(row)
             await websocket1.send(json.dumps(msg))
             await websocket2.send(json.dumps(msg))
 
@@ -209,4 +231,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
     sys.exit(main())
-
