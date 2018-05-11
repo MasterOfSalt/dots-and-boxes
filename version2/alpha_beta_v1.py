@@ -1,19 +1,46 @@
+"""
+Pseudocode from https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
+01 function alphabeta(node, depth, α, β, maximizingPlayer) is
+02     if depth = 0 or node is a terminal node then
+03         return the heuristic value of node
+04     if maximizingPlayer then
+05         v := -∞
+06         for each child of node do
+07             v := max(v, alphabeta(child, depth – 1, α, β, FALSE))
+08             α := max(α, v)
+09             if β ≤ α then
+10                 break (* β cut-off *)
+11         return v
+12     else
+13         v := +∞
+14         for each child of node do
+15             v := min(v, alphabeta(child, depth – 1, α, β, TRUE))
+16             β := min(β, v)
+17             if β ≤ α then
+18                 break (* α cut-off *)
+19         return v
+"""
 import sys
 max = sys.maxsize
 def alphabeta(board,depth,player):
-    if depth == 0:
-        return (move[0],move[1], board.boxes[1] - board.boxes[0])
-    else:
-        return maximax(board,depth,player,-max,max)
+"""method description
+:param x: _explanation
+"""
+    return maximax(board,depth,player,-max,max)
 
 def done(move):
+    """method description
+    :param x: _explanation
+    """
     return move[0],move[1],1337
 
-def maximax(board, depth, player,alpha,beta,move= (0,0)):
+def maximax(board, depth, player,alpha,beta,move=(0,0)):
+    """method description
+    :param x: _explanation
+    """
     if depth == 0:
         return done(move)
-    move =  ()
-    score = -max
+    score = 0
     for x, y in board.free_lines():
         current = board.copy()
         if current.fill_line(x, y, player):
@@ -24,15 +51,18 @@ def maximax(board, depth, player,alpha,beta,move= (0,0)):
             move = (x,y)
             score = current_score
         alpha = bigger(score, alpha)
+        print (score)
         if beta <= alpha:
             break
     return (move[0],move[1],score)
 
 def minimin(board, depth,player,alpha,beta,move=(0,0)):
+    """method description
+    :param x: _explanation
+    """
     if depth == 0:
         return done(move)
-    move = ()
-    score = max
+    score = board.max_points()
     for x, y in board.free_lines():
         current = board.copy()
         if current.fill_line(x, y, player):
@@ -45,21 +75,31 @@ def minimin(board, depth,player,alpha,beta,move=(0,0)):
         beta = smaller(beta, score)
         if beta <= alpha:
             break
+        print (score)
     return (move[0],move[1],score)
 
 def bigger(a,b):
+    """method description
+    :param x: _explanation
+    """
     if a > b:
         return a
     else:
         return b
 
 def smaller(a,b):
+    """method description
+    :param x: _explanation
+    """
     if a < b:
         return a
     else:
         return b
 
 def swap_player(player):
+    """method description
+    :param x: _explanation
+    """
     if player == 1:
         return 2
     else:

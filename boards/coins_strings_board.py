@@ -15,10 +15,11 @@ class Coins_strings_board:
         #rows en cols in #dots
         self.board = [None] * ((2 * nb_rows -1) * (2 * nb_cols-1))
         #expressed in number of symbols and not rows/cols in grid
-        self.dimensions = (nb_rows * 2 - 1, nb_cols * 2 - 1)
+        self.dimension = (nb_rows * 2 - 1, nb_cols * 2 - 1)
         self.available_moves = self.free_lines()
         self.boxes = [0, 0] # Player 2, Player 1
-
+    def max_points(self):
+         return (self.dimension[0] * self.dimension[1]) - self.boxes[0] - self.boxes[1]
     def free_lines(self):
         """method description
         :param _name_: _explanation
@@ -26,7 +27,7 @@ class Coins_strings_board:
         moves, i = [], 1
         for cel in self.board[1::2]:
             if not cel:
-                moves.append((i // self.dimensions[1], i % self.dimensions[1]))
+                moves.append((i // self.dimension[1], i % self.dimension[1]))
             i += 2
         return moves
 
@@ -49,7 +50,7 @@ class Coins_strings_board:
         """method description
         :param _name_: _explanation
         """
-        return (x * self.dimensions[1] + y)
+        return (x * self.dimension[1] + y)
     def calc_score_for_set_line(self,x,y,player):
         """When a line is set this function detects if the player scored any points and adds them to the scoreboard
         :param _name_: _explanation
@@ -65,14 +66,14 @@ class Coins_strings_board:
             if y - 2 >= 0 and self.board[pos] and self.board[pos - 2] and self.board[pos_1_to_left - 1] and self.board[pos_1_to_right - 1]:
                 playagain = True
                 self.score(x,y,player)
-            if (y + 2 < self.dimensions[1]) and self.board[pos] and self.board[pos + 2] and self.board[pos_1_to_left + 1]  and self.board[pos_1_to_right + 1]:
+            if (y + 2 < self.dimension[1]) and self.board[pos] and self.board[pos + 2] and self.board[pos_1_to_left + 1]  and self.board[pos_1_to_right + 1]:
                 playagain = True
                 self.score(x,y,player)
         else:
             if x - 2 >= 0 and self.board[pos] and self.board[pos_2_to_left] and self.board[pos_1_to_left - 1] and self.board[pos_1_to_left + 1]:
                 playagain = True
                 self.score(x,y,player)
-            if (x + 2 < self.dimensions[0]) and self.board[pos] and self.board[pos_2_to_right] and self.board[pos_1_to_right - 1] and self.board[pos_1_to_right+ 1]:
+            if (x + 2 < self.dimension[0]) and self.board[pos] and self.board[pos_2_to_right] and self.board[pos_1_to_right - 1] and self.board[pos_1_to_right+ 1]:
                 playagain = True
                 self.score(x,y,player)
         return playagain
@@ -83,7 +84,7 @@ class Coins_strings_board:
         :param _name_: _explanation
         """
         csb = Coins_strings_board()
-        csb.dimensions = self.dimensions
+        csb.dimension = self.dimension
         #shallow copies
         csb.board = self.board[:]
         csb.available_moves = self.available_moves[:]
