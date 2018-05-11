@@ -1,10 +1,7 @@
 import sys
 max = sys.maxsize
 def alphabeta(board,depth,player):
-    if depth == 0:
-        return (move[0],move[1], board.boxes[1] - board.boxes[0])
-    else:
-        return maximax(board,depth,player,-max,max)
+    return maximax(board,depth,player,-max,max)
 
 def done(move):
     return move[0],move[1],1337
