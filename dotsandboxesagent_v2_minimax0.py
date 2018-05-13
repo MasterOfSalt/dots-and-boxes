@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 from boards.coins_strings_board import Coins_strings_board
-import version2.alpha_beta_v1 as abv1
 from threading import Timer
 """
 dotsandboxesagent.py
@@ -175,7 +174,7 @@ class DotsAndBoxesAgent:
                 return (y,x,"v")
         t = Timer(15.0, next_move_f())
         t.start()
-        (a,b,score) = maximax(self.board,2,list(self.player)[0],-max,max,next_move)
+        (a,b,score) = maximax(self.board,5,list(self.player)[0],-max,max,next_move)
         t.cancel()
         if a%2==0:
             x = self.odds.index(b)
