@@ -3,14 +3,6 @@
 from boards.strings_board import Strings_board
 import version3.heuristics as heuristics
 import version4.qlearning as qlearning
-"""
-dotsandboxesagent.py
-
-Template for the Machine Learning Project course at KU Leuven (2017-2018)
-of Hendrik Blockeel and Wannes Meert.
-
-Copyright (c) 2018 KU Leuven. All rights reserved.
-"""
 import sys
 import argparse
 import logging
@@ -19,6 +11,15 @@ import websockets
 import json
 from collections import defaultdict
 import random
+"""
+dotsandboxesagent.py
+
+Template for the Machine Learning Project course at KU Leuven (2017-2018)
+of Hendrik Blockeel and Wannes Meert.
+
+Copyright (c) 2018 KU Leuven. All rights reserved.
+"""
+
 
 
 logger = logging.getLogger(__name__)
@@ -56,9 +57,9 @@ class DotsAndBoxesAgent:
             if(i%2!=0):
                 self.odds.append(i)
             i += 1
-            
 
-        
+
+
     def add_player(self, player):
         """Use the same agent for multiple players."""
         self.player.add(player)
@@ -77,12 +78,12 @@ class DotsAndBoxesAgent:
         else:
             y = column
             x = self.odds[row]
-            
-            
+
+
         self.board.fill_line(x,y)
 
     def next_action(self):
-        #Load Q-learning data    
+        #Load Q-learning data
         Qedge = qlearning.bot2_load(10)
         """Return the next action this agent wants to perform.
 
@@ -92,7 +93,7 @@ class DotsAndBoxesAgent:
         if len(free_lines) == 0:
             # Board full
             return None
-        
+
         #(a,b) = heuristics.always4never3(self.board)
         (a,b) = qlearning.bot2_move(self.board,Qedge,10)
         if a%2==0:
