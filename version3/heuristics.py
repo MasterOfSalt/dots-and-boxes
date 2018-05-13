@@ -1,8 +1,6 @@
 import numpy as np
 from random import randint
 
-
-
 def get_first_completing_move(board):
     """method description
     :param x: _explanation
@@ -42,4 +40,3 @@ def always4never3(board):
             return(potential_moves_not3[randint(0,len(potential_moves_not3)-1)])
         else:
             return(potential_moves[randint(0,len(potential_moves)-1)])
-
