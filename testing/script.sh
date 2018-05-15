@@ -11,7 +11,7 @@ do
     for i in $(seq 1 $GAMES);
     do
       echo "started game $i for $col x $row"
-    	python3 dotsandboxescompete.py $P1ADDRESS $P2ADDRESS -c $col -r $row
+    	python3 ../dotsandboxescompete.py $P1ADDRESS $P2ADDRESS -c $col -r $row
       echo "finished game $i"
     done
   done
@@ -29,6 +29,10 @@ do
     done
   done
 done
+
+echo "started parsing"
+python3 parser.py
+echo "done parsing"
 
 
 #bash script.sh 10 10 ws://localhost:2001 ws://localhost:2002
