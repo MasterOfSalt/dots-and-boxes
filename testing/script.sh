@@ -24,7 +24,7 @@ do
     for i in $(seq 1 $GAMES);
     do
       echo "started game $i for $col x $row"
-      python3 dotsandboxescompete.py $P1ADDRESS $P2ADDRESS -c $col -r $row
+      python3 ../dotsandboxescompete.py $P1ADDRESS $P2ADDRESS -c $col -r $row
       echo "finished game $i"
     done
   done
