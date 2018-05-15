@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 from boards.coins_strings_board import Coins_strings_board
-from threading import Timer
+import version2.alpha_beta_v1 as abv1
+
+
 """
 dotsandboxesagent.py
 
@@ -87,7 +89,6 @@ class DotsAndBoxesAgent:
             a = self.odds[y]
             b = self.evens[x]
         self.board.fill_line(a,b,player)
-
     def next_action(self):
         """Return the next action this agent wants to perform.
         :return: (row, col, orientation) [EQUIVALENT]
@@ -96,86 +97,12 @@ class DotsAndBoxesAgent:
         # logger.info("Computing next move (grid={}x{}, player={})"\
         #         .format(self.board.nb_rows, self.board.nb_cols, self.player))
 
-        def done(move):
-            return move[0],move[1],1337
-
-        def maximax(board, depth, player,alpha,beta,move):
-            if depth == 0:
-                return done(move)
-            score = 0
-            for x, y in board.free_lines():
-                current = board.copy()
-                if current.fill_line(x, y, player):
-                    (a,b,current_score) = maximax(current,depth-1,player,alpha,beta,(x,y))
-                else:
-                    (a,b,current_score) = minimin(current,depth-1,player,alpha,beta,(x,y))
-                if current_score > score:
-                    move = (x,y)
-                    score = current_score
-                alpha = bigger(score, alpha)
-                next_move = move
-                if beta <= alpha:
-                    break
-            return (move[0],move[1],score)
-
-        def minimin(board, depth,player,alpha,beta,move):
-            if depth == 0:
-                return done(move)
-            score = board.max_points()
-            for x, y in board.free_lines():
-                current = board.copy()
-                if current.fill_line(x, y, player):
-                    (a,b,current_score) = minimin(current,depth-1,player,alpha,beta,(x,y))
-                else:
-                    (a,b,current_score) = maximax(current,depth-1,player,alpha,beta,(x,y))
-                if current_score < score:
-                    move = (x,y)
-                    score = current_score
-                beta = smaller(beta, score)
-                next_move = move
-                if beta <= alpha:
-                    break
-            return (move[0],move[1],score)
-
-        def bigger(a,b):
-            if a > b:
-                return a
-            else:
-                return b
-
-        def smaller(a,b):
-            if a < b:
-                return a
-            else:
-                return b
-
-        def swap_player(player):
-            if player == 1:
-                return 2
-            else:
-                return 1
         free_lines = self.board.free_lines()
-        max = sys.maxsize
         if len(free_lines) == 0:
             # Board full
             return None
-        global next_move
-        next_move = free_lines[0]
-        def next_move_f():
-            a = next_move[0]
-            b = next_move[1]
-            if a%2==0:
-                x = self.odds.index(b)
-                y = self.evens.index(a)
-                return (y,x,"h")
-            else:
-                y = self.odds.index(a)
-                x = self.evens.index(b)
-                return (y,x,"v")
-        t = Timer(15.0, next_move_f())
-        t.start()
-        (a,b,score) = maximax(self.board,5,list(self.player)[0],-max,max,next_move)
-        t.cancel()
+        (a,b,score) = abv1.alphabeta(self.board,depth = 2,player = list(self.player)[0])
+
         if a%2==0:
             x = self.odds.index(b)
             y = self.evens.index(a)
@@ -184,7 +111,6 @@ class DotsAndBoxesAgent:
             y = self.odds.index(a)
             x = self.evens.index(b)
             return (y,x,"v")
-
 
     def end_game(self):
         self.ended = True

@@ -23,9 +23,9 @@ Pseudocode from https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
 import sys
 max = sys.maxsize
 def alphabeta(board,depth,player):
-"""method description
-:param x: _explanation
-"""
+    """method description
+    :param x: _explanation
+    """
     return maximax(board,depth,player,-max,max)
 
 def done(move):
@@ -40,7 +40,7 @@ def maximax(board, depth, player,alpha,beta,move=(0,0)):
     """
     if depth == 0:
         return done(move)
-    score = 0
+    score = board.boxes[player-1]
     for x, y in board.free_lines():
         current = board.copy()
         if current.fill_line(x, y, player):
@@ -51,7 +51,7 @@ def maximax(board, depth, player,alpha,beta,move=(0,0)):
             move = (x,y)
             score = current_score
         alpha = bigger(score, alpha)
-        print (score)
+        #print (score)
         if beta <= alpha:
             break
     return (move[0],move[1],score)
@@ -75,7 +75,7 @@ def minimin(board, depth,player,alpha,beta,move=(0,0)):
         beta = smaller(beta, score)
         if beta <= alpha:
             break
-        print (score)
+        #print (score)
     return (move[0],move[1],score)
 
 def bigger(a,b):
