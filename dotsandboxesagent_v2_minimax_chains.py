@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 from boards.coins_strings_board_numeric import Coins_strings_board
-import version3.heuristics as heuristics
+import version2.alpha_beta_v2_chains as chains
 """
 dotsandboxesagent.py
 
@@ -90,8 +90,7 @@ class DotsAndBoxesAgent:
             # Board full
             return None
         (a,b) = free_lines[0]
-        print(len(free_lines))
-        print(free_lines)
+        print("longest chain:",chains.find_longest_chain(self.board))
         a = np.asscalar(np.int16(a))
         b = np.asscalar(np.int16(b))
         if a%2==0:
