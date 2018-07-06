@@ -144,6 +144,10 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                 player2 = "V2:ALPHABETA"
             if uri2 == "ws://localhost:2003":
                 player2 = "V3:HEURISTIC"
+            if uri1 == "ws://localhost:2004":
+                player1 = "V5:Monte"
+            if uri2 == "ws://localhost:2004":
+                player2 = "V5:Monte"
             if winner == 1:
                 winnerstring = player1
             else:
