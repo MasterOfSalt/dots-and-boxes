@@ -47,7 +47,48 @@ class MonteCarloSearchTree:
                 win = True
             nodes = nodes[0]['children']
 
-    
+    def get_best_move(self,nodes):
+        winrate = -1
+        next_move = False
+        for node in nodes:
+            if node['wins']/node['plays'] > winrate:
+                next_move = node
+        return next_move
+
+    def fill_line(self,nodes,move):
+        for node in nodes:
+            if node['move'] == move:
+                return node
+        return False
+
+
+    def add_game(self,l,winner):
+        if(winner == 1):
+            win = True
+        else:
+            win = False
+        nodes = self.tree['nodes']
+        while(len(l)>0):
+            done = False
+            el = l.pop(0)
+            for node in nodes:
+                if node['move'] == el:
+                    node['plays'] += 1
+                    if win:
+                        node['wins'] += 1
+                        win = False
+                    else:
+                        win = True
+                    nodes = node['children']
+                    done = True
+                    break
+            if not done:
+                self.explore_new_nodes([el] + l,nodes,win)
+                break
+        with open(self.dimensions+'/tree.data', 'w') as outfile:
+            json.dump(self.tree, outfile)
+
+
 
 
 
