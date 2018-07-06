@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-from boards.namelessboard import Coins_strings_board
-import version2.alpha_beta_v1 as abv1
-
-
 """
 dotsandboxesagent.py
 
@@ -20,7 +16,8 @@ import websockets
 import json
 from collections import defaultdict
 import random
-
+from boards.mcst import MonteCarloSearchTree
+from boards.board import Board
 
 logger = logging.getLogger(__name__)
 games = {}
@@ -46,80 +43,63 @@ class DotsAndBoxesAgent:
         :param nb_rows: Rows in grid
         :param nb_cols: Columns in grid
         :param timelimit: Maximum time allowed to send a next action.
-        :param odds, evens: used to convert to and from string-and-point boards
         """
         self.player = {player}
         self.timelimit = timelimit
         self.ended = False
-        self.board = Coins_strings_board(nb_rows+1,nb_cols+1)
-        self.odds = []
-        self.evens = []
+        self.tree = MonteCarloSearchTree(nb_rows,nb_cols)
+        self.nodes = self.tree.tree['nodes']
+        self.board = Board(nb_rows,nb_cols)
 
-        i = 0
-        while i<120:
-            if(i%2==0):
-                self.evens.append(i)
-            else:
-                self.odds.append(i)
-            i += 1
 
 
     def add_player(self, player):
         """Use the same agent for multiple players."""
         self.player.add(player)
 
-    def register_action(self, y, x, orientation, player):
+    def register_action(self, row, column, orientation, player):
         """
-        INPUT
-        Register action played in game after conversion to string board
+        Register action played in game.
         :param row:
         :param columns:
         :param orientation: "v" or "h"
         :param player: 1 or 2
         """
-        """
-        OUTPUT
-        :param: number
-        :param: number
-        """
-        if (orientation == "h"):
-            a = self.evens[y]
-            b = self.odds[x]
-        else:
-            a = self.odds[y]
-            b = self.evens[x]
-        self.board.fill_line(a,b,player)
+        node = self.tree.fill_line(self.nodes,str(row)+","+str(column)+","+str(orientation))
+        if node != False:
+            self.nodes = node['children']
+        self.board.fill_line(row,column,orientation,player)
 
     def next_action(self):
         """Return the next action this agent wants to perform.
-        :return: (row, col, orientation) [EQUIVALENT]
-        :return: (y, x, orientation) [EQUIVALENT]
+        :return: (row, column, orientation)
         """
-        # logger.info("Computing next move (grid={}x{}, player={})"\
-        #         .format(self.board.nb_rows, self.board.nb_cols, self.player))
+        logger.info("Computing next move (grid={}x{}, player={})"\
+                .format(self.board.nb_rows, self.board.nb_cols, self.player))
 
         free_lines = self.board.free_lines()
         if len(free_lines) == 0:
             # Board full
             return None
-        """
-        bestmove = ()
-        for move in Tree.getchildren():
-            if(move.wins/move.simulations > bestmove.wins/bestmove.simulations):
-                bestmove = move
-
-        """
+        s = self.tree.get_best_move(self.nodes)
+        if s == False:
+            # Random move
+            movei = random.randint(0, len(free_lines) - 1)
+            r, c, o = free_lines[movei]
+            return r, c, o
+        else:
+            r,c,o = s.split(",")
+            return r,c,o
     def end_game(self):
         self.ended = True
 
 
-
-
 ## MAIN EVENT LOOP
+
 async def handler(websocket, path):
     logger.info("Start listening")
+    #   msg = await websocket.recv()
     game = None
-    # msg = await websocket.recv()
     try:
         async for msg in websocket:
             logger.info("< {}".format(msg))
