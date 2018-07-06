@@ -20,8 +20,9 @@ import random
 import uuid
 import time
 import csv
+import uuid
 logger = logging.getLogger(__name__)
-
+import os
 
 def start_competition(address1, address2, nb_rows, nb_cols, timelimit):
    asyncio.get_event_loop().run_until_complete(connect_agent(address1, address2, nb_rows, nb_cols, timelimit))
@@ -57,7 +58,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             await websocket1.send(json.dumps(msg))
             msg["player"] = 2
             await websocket2.send(json.dumps(msg))
-
+            moves = []
             # Run game
             while winner is None:
                 ask_time = time.time()
@@ -80,16 +81,26 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                     continue
                 r, c = msg["location"]
                 o = msg["orientation"]
+                moves.append(str(r)+","+str(c)+","+str(o))
                 next_player = user_action(r, c, o, cur_player,
                                           cells, points,
                                           nb_rows, nb_cols)
                 if points[1] + points[2] == nb_cols * nb_rows:
                     # Game over
                     winner = 1
+                    id = uuid.uuid1()
+
+
                     if points[2] == points[1]:
                         winner = 0
                     if points[2] > points[1]:
                         winner = 2
+                    folder = str(nb_cols) + "x" + str(nb_rows)
+                    name = "game-"+str(nb_cols)+"-"+str(nb_rows)+"-"+str(id)+"_"+str(winner)+".json"
+                    if not os.path.exists("data/"+folder):
+                        os.makedirs("data/"+folder)
+                    jfile = open("data/"+folder+"/"+name,'w+')
+                    json.dump(moves,jfile)
                 else:
                     msg = {
                         "type": "action",
