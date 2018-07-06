@@ -63,12 +63,31 @@ class MonteCarloSearchTree:
 
 
     def add_game(self,l,winner):
+        go = True
         if(winner == 1):
             win = True
-        else:
+        if(winner == 2):
             win = False
+        if(winner == 0):
+            go = False
+            nodes = self.tree['nodes']
+            while(len(l)>0 and go):
+                done = False
+                el = l.pop(0)
+                for node in nodes:
+                    if node['move'] == el:
+                        node['plays'] += 1
+                        nodes = node['children']
+                        done = True
+                        break
+                if not done:
+                    self.explore_new_nodes([el] + l,nodes,win)
+                    break
+            with open(self.dimensions+'/tree.data', 'w') as outfile:
+                json.dump(self.tree, outfile)
+
         nodes = self.tree['nodes']
-        while(len(l)>0):
+        while(len(l)>0 and go):
             done = False
             el = l.pop(0)
             for node in nodes:
