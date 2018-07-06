@@ -27,6 +27,28 @@ class MonteCarloSearchTree:
             file.write(init)
             file.close()
 
+    def explore_new_nodes(self,l,nodes,win):
+        for el in l:
+            if win:
+                nodes.append({
+                    'wins': 1,
+                    'plays': 1,
+                    'move': el,
+                    'children':[]
+                })
+                win = False
+            else:
+                nodes.append({
+                    'wins': 0,
+                    'plays': 1,
+                    'move': el,
+                    'children':[]
+                })
+                win = True
+            nodes = nodes[0]['children']
+
+    
+
 
 
 # add_game(['1,2,h','1,1,v','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h'],1)
