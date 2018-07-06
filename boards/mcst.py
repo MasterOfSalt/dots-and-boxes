@@ -89,6 +89,20 @@ class MonteCarloSearchTree:
             json.dump(self.tree, outfile)
 
 
+    def process_games(self):
+        path = self.dimensions + '/games/unprocessed/*.json'
+        files = glob.glob(path)
+        for name in files:
+            try:
+                with open(name,'r') as f:
+                    basicList = json.load(f)
+                    base = os.path.basename(name)
+                    winner = int(base.split('_')[1].split('.')[0])
+                    self.add_game(basicList,winner)
+                os.rename(name, self.dimensions + "/games/processed/"+base)
+            except IOError as exc:
+                if exc.errno != errno.EISDIR:
+                    raise
 
 
 
