@@ -39,16 +39,20 @@ and immediatly parse/learn them.
 
 E.g
 
-    $ bash play_nxm_games.sh v1 v2 20 5 5  P L 
+    $ bash play_n_games.sh v1 v2 10 4 4
     
 * **$1** — Player 1 (this can be "v1","v2","v3",...)
 * **$2** — Player 1 (this can be "v1","v2","v3",...)
 * **$3** — Number of games
+* **$4** — Rows 
+* **$5** — Columns 
+
+    $ bash play_nxm_games_extended.sh v1 v2 20 5 5  P L 
+    
 * **$4** — Rows (actually permutations up to this column).
 * **$5** — Columns (actually permutations up to this column).
 * **$6** — Parse the data afterwards
 * **$7** — Learn the data afterwards (option requires Parsing)
-
 
 Start the agent client
 ----------------------
