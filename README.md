@@ -47,6 +47,7 @@ E.g
 * **$4** — Rows 
 * **$5** — Columns 
 
+
     $ bash play_nxm_games_extended.sh v1 v2 20 5 5  P L 
     
 * **$4** — Rows (actually permutations up to this column).
