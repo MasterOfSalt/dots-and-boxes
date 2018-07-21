@@ -95,12 +95,19 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                         winner = 0
                     if points[2] > points[1]:
                         winner = 2
-                    folder = str(nb_cols) + "x" + str(nb_rows)
-                    name = "game-"+str(nb_cols)+"-"+str(nb_rows)+"-"+str(id)+"_"+str(winner)+".json"
+                    folder = str(nb_rows) + "x" + str(nb_cols)
+                    name = "game-"+str(nb_rows)+"-"+str(nb_cols)+"-"+str(id)+"_"+str(winner)+".json"
+                    
+                        
                     if not os.path.exists("data/"+folder):
-                        os.makedirs("data/"+folder)
-                    jfile = open("data/"+folder+"/"+name,'w+')
-                    json.dump(moves,jfile)
+                        if uri1 == "ws://127.0.0.1:2005" or uri2 == "ws://127.0.0.1:2005":
+                            os.makedirs("../data/version5/"+folder+"/unprocessed/", exist_ok=True)
+                            jfile = open("../data/version5/"+folder+"/unprocessed/"+name,'w+')
+                            json.dump(moves,jfile)
+                        else:
+                            os.makedirs("../data/"+folder, exist_ok=True)
+                            jfile = open("../data/"+folder+"/"+name,'w+')
+                            json.dump(moves,jfile)
                 else:
                     msg = {
                         "type": "action",
@@ -128,25 +135,25 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                 "orientation": o,
                 "winner": winner
             }
-            f = open('data.csv', 'a')
+            f = open('../data/data.csv', 'a')
             writer = csv.writer(f)
             player1 = "player1"
             player2 = "player2"
-            if uri1 == "ws://localhost:2001":
+            if uri1 == "ws://localhost:2001" or uri1 == "ws://127.0.0.1:2001":
                 player1 = "V1:RANDOM"
-            if uri1 == "ws://localhost:2002":
+            if uri1 == "ws://localhost:2002" or uri1 == "ws://127.0.0.1:2002":
                 player1 = "V2:ALPHABETA"
-            if uri1 == "ws://localhost:2003":
+            if uri1 == "ws://localhost:2003" or uri1 == "ws://127.0.0.1:2003":
                 player1 = "V3:HEURISTIC"
-            if uri2 == "ws://localhost:2001":
-                player2 = "V1:RANDOM"
-            if uri2 == "ws://localhost:2002":
-                player2 = "V2:ALPHABETA"
-            if uri2 == "ws://localhost:2003":
-                player2 = "V3:HEURISTIC"
-            if uri1 == "ws://localhost:2004":
+            if uri1 == "ws://localhost:2005" or uri1 == "ws://127.0.0.1:2005":
                 player1 = "V5:Monte"
-            if uri2 == "ws://localhost:2004":
+            if uri2 == "ws://localhost:2001" or uri2 == "ws://127.0.0.1:2001":
+                player2 = "V1:RANDOM"
+            if uri2 == "ws://localhost:2002" or uri2 == "ws://127.0.0.1:2002":
+                player2 = "V2:ALPHABETA"
+            if uri2 == "ws://localhost:2003" or uri2 == "ws://127.0.0.1:2003":
+                player2 = "V3:HEURISTIC"
+            if uri2 == "ws://localhost:2005" or uri2 == "ws://127.0.0.1:2005":
                 player2 = "V5:Monte"
             if winner == 1:
                 winnerstring = player1

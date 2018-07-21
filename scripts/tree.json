@@ -1,0 +1,902 @@
+{
+    "nodes": [
+        {
+            "children": [],
+            "move": "1,3,v",
+            "plays": 1,
+            "wins": 0
+        },
+        {
+            "children": [],
+            "move": "2,3,v",
+            "plays": 1,
+            "wins": 0
+        },
+        {
+            "children": [
+                {
+                    "children": [],
+                    "move": "0,0,h",
+                    "plays": 1,
+                    "wins": 1
+                },
+                {
+                    "children": [],
+                    "move": "1,3,v",
+                    "plays": 1,
+                    "wins": 1
+                },
+                {
+                    "children": [],
+                    "move": "2,2,h",
+                    "plays": 1,
+                    "wins": 0
+                },
+                {
+                    "children": [],
+                    "move": "3,1,h",
+                    "plays": 1,
+                    "wins": 1
+                },
+                {
+                    "children": [
+                        {
+                            "children": [],
+                            "move": "0,3,v",
+                            "plays": 1,
+                            "wins": 0
+                        },
+                        {
+                            "children": [],
+                            "move": "1,0,h",
+                            "plays": 1,
+                            "wins": 0
+                        },
+                        {
+                            "children": [],
+                            "move": "1,2,h",
+                            "plays": 1,
+                            "wins": 1
+                        },
+                        {
+                            "children": [],
+                            "move": "1,3,v",
+                            "plays": 1,
+                            "wins": 0
+                        },
+                        {
+                            "children": [
+                                {
+                                    "children": [],
+                                    "move": "0,2,h",
+                                    "plays": 1,
+                                    "wins": 1
+                                },
+                                {
+                                    "children": [],
+                                    "move": "2,2,v",
+                                    "plays": 1,
+                                    "wins": 1
+                                },
+                                {
+                                    "children": [],
+                                    "move": "3,1,h",
+                                    "plays": 1,
+                                    "wins": 0
+                                },
+                                {
+                                    "children": [],
+                                    "move": "3,2,h",
+                                    "plays": 1,
+                                    "wins": 1
+                                },
+                                {
+                                    "children": [
+                                        {
+                                            "children": [],
+                                            "move": "0,1,v",
+                                            "plays": 1,
+                                            "wins": 0
+                                        },
+                                        {
+                                            "children": [],
+                                            "move": "0,2,h",
+                                            "plays": 1,
+                                            "wins": 0
+                                        },
+                                        {
+                                            "children": [],
+                                            "move": "1,0,v",
+                                            "plays": 1,
+                                            "wins": 0
+                                        },
+                                        {
+                                            "children": [],
+                                            "move": "3,2,h",
+                                            "plays": 1,
+                                            "wins": 1
+                                        },
+                                        {
+                                            "children": [
+                                                {
+                                                    "children": [],
+                                                    "move": "0,0,h",
+                                                    "plays": 1,
+                                                    "wins": 1
+                                                },
+                                                {
+                                                    "children": [],
+                                                    "move": "1,0,h",
+                                                    "plays": 1,
+                                                    "wins": 1
+                                                },
+                                                {
+                                                    "children": [],
+                                                    "move": "1,3,v",
+                                                    "plays": 1,
+                                                    "wins": 0
+                                                },
+                                                {
+                                                    "children": [],
+                                                    "move": "2,1,h",
+                                                    "plays": 1,
+                                                    "wins": 1
+                                                },
+                                                {
+                                                    "children": [
+                                                        {
+                                                            "children": [],
+                                                            "move": "0,1,h",
+                                                            "plays": 1,
+                                                            "wins": 0
+                                                        },
+                                                        {
+                                                            "children": [],
+                                                            "move": "2,2,h",
+                                                            "plays": 1,
+                                                            "wins": 0
+                                                        },
+                                                        {
+                                                            "children": [],
+                                                            "move": "2,2,v",
+                                                            "plays": 1,
+                                                            "wins": 0
+                                                        },
+                                                        {
+                                                            "children": [],
+                                                            "move": "3,0,h",
+                                                            "plays": 1,
+                                                            "wins": 1
+                                                        },
+                                                        {
+                                                            "children": [
+                                                                {
+                                                                    "children": [],
+                                                                    "move": "0,1,h",
+                                                                    "plays": 1,
+                                                                    "wins": 1
+                                                                },
+                                                                {
+                                                                    "children": [],
+                                                                    "move": "0,1,v",
+                                                                    "plays": 1,
+                                                                    "wins": 1
+                                                                },
+                                                                {
+                                                                    "children": [],
+                                                                    "move": "1,0,h",
+                                                                    "plays": 1,
+                                                                    "wins": 0
+                                                                },
+                                                                {
+                                                                    "children": [],
+                                                                    "move": "2,1,v",
+                                                                    "plays": 1,
+                                                                    "wins": 1
+                                                                },
+                                                                {
+                                                                    "children": [
+                                                                        {
+                                                                            "children": [],
+                                                                            "move": "0,0,h",
+                                                                            "plays": 1,
+                                                                            "wins": 1
+                                                                        },
+                                                                        {
+                                                                            "children": [],
+                                                                            "move": "0,1,h",
+                                                                            "plays": 1,
+                                                                            "wins": 0
+                                                                        },
+                                                                        {
+                                                                            "children": [],
+                                                                            "move": "0,1,v",
+                                                                            "plays": 1,
+                                                                            "wins": 0
+                                                                        },
+                                                                        {
+                                                                            "children": [],
+                                                                            "move": "1,1,h",
+                                                                            "plays": 1,
+                                                                            "wins": 0
+                                                                        },
+                                                                        {
+                                                                            "children": [
+                                                                                {
+                                                                                    "children": [],
+                                                                                    "move": "1,0,v",
+                                                                                    "plays": 1,
+                                                                                    "wins": 1
+                                                                                },
+                                                                                {
+                                                                                    "children": [],
+                                                                                    "move": "1,2,h",
+                                                                                    "plays": 1,
+                                                                                    "wins": 1
+                                                                                },
+                                                                                {
+                                                                                    "children": [],
+                                                                                    "move": "2,2,h",
+                                                                                    "plays": 1,
+                                                                                    "wins": 1
+                                                                                },
+                                                                                {
+                                                                                    "children": [],
+                                                                                    "move": "2,3,v",
+                                                                                    "plays": 1,
+                                                                                    "wins": 0
+                                                                                },
+                                                                                {
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "children": [],
+                                                                                            "move": "1,1,h",
+                                                                                            "plays": 1,
+                                                                                            "wins": 0
+                                                                                        },
+                                                                                        {
+                                                                                            "children": [],
+                                                                                            "move": "1,2,v",
+                                                                                            "plays": 1,
+                                                                                            "wins": 0
+                                                                                        },
+                                                                                        {
+                                                                                            "children": [],
+                                                                                            "move": "1,2,v",
+                                                                                            "plays": 1,
+                                                                                            "wins": 0
+                                                                                        },
+                                                                                        {
+                                                                                            "children": [],
+                                                                                            "move": "2,0,h",
+                                                                                            "plays": 1,
+                                                                                            "wins": 1
+                                                                                        },
+                                                                                        {
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "children": [],
+                                                                                                    "move": "0,2,v",
+                                                                                                    "plays": 1,
+                                                                                                    "wins": 0
+                                                                                                },
+                                                                                                {
+                                                                                                    "children": [],
+                                                                                                    "move": "0,3,v",
+                                                                                                    "plays": 1,
+                                                                                                    "wins": 1
+                                                                                                },
+                                                                                                {
+                                                                                                    "children": [],
+                                                                                                    "move": "2,0,h",
+                                                                                                    "plays": 1,
+                                                                                                    "wins": 1
+                                                                                                },
+                                                                                                {
+                                                                                                    "children": [],
+                                                                                                    "move": "3,0,h",
+                                                                                                    "plays": 1,
+                                                                                                    "wins": 1
+                                                                                                },
+                                                                                                {
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "children": [],
+                                                                                                            "move": "1,0,v",
+                                                                                                            "plays": 1,
+                                                                                                            "wins": 1
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "children": [],
+                                                                                                            "move": "1,2,v",
+                                                                                                            "plays": 1,
+                                                                                                            "wins": 0
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "children": [],
+                                                                                                            "move": "3,0,h",
+                                                                                                            "plays": 1,
+                                                                                                            "wins": 0
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "children": [],
+                                                                                                            "move": "3,1,h",
+                                                                                                            "plays": 1,
+                                                                                                            "wins": 0
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "children": [],
+                                                                                                                    "move": "0,0,v",
+                                                                                                                    "plays": 1,
+                                                                                                                    "wins": 1
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "children": [],
+                                                                                                                    "move": "0,3,v",
+                                                                                                                    "plays": 1,
+                                                                                                                    "wins": 1
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "children": [],
+                                                                                                                    "move": "1,2,v",
+                                                                                                                    "plays": 1,
+                                                                                                                    "wins": 0
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "children": [],
+                                                                                                                    "move": "2,2,v",
+                                                                                                                    "plays": 1,
+                                                                                                                    "wins": 1
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "children": [],
+                                                                                                                            "move": "1,1,v",
+                                                                                                                            "plays": 1,
+                                                                                                                            "wins": 0
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "children": [],
+                                                                                                                            "move": "2,0,h",
+                                                                                                                            "plays": 1,
+                                                                                                                            "wins": 0
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "children": [],
+                                                                                                                            "move": "2,0,v",
+                                                                                                                            "plays": 1,
+                                                                                                                            "wins": 0
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "children": [],
+                                                                                                                            "move": "2,2,v",
+                                                                                                                            "plays": 1,
+                                                                                                                            "wins": 1
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "children": [],
+                                                                                                                                    "move": "0,2,v",
+                                                                                                                                    "plays": 1,
+                                                                                                                                    "wins": 1
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "children": [],
+                                                                                                                                    "move": "1,0,v",
+                                                                                                                                    "plays": 1,
+                                                                                                                                    "wins": 1
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "children": [],
+                                                                                                                                    "move": "2,0,v",
+                                                                                                                                    "plays": 1,
+                                                                                                                                    "wins": 0
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "children": [],
+                                                                                                                                    "move": "3,0,h",
+                                                                                                                                    "plays": 1,
+                                                                                                                                    "wins": 1
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "children": [],
+                                                                                                                                            "move": "1,1,h",
+                                                                                                                                            "plays": 1,
+                                                                                                                                            "wins": 1
+                                                                                                                                        },
+                                                                                                                                        {
+                                                                                                                                            "children": [],
+                                                                                                                                            "move": "1,1,v",
+                                                                                                                                            "plays": 1,
+                                                                                                                                            "wins": 0
+                                                                                                                                        },
+                                                                                                                                        {
+                                                                                                                                            "children": [],
+                                                                                                                                            "move": "2,0,v",
+                                                                                                                                            "plays": 1,
+                                                                                                                                            "wins": 0
+                                                                                                                                        },
+                                                                                                                                        {
+                                                                                                                                            "children": [],
+                                                                                                                                            "move": "3,1,h",
+                                                                                                                                            "plays": 1,
+                                                                                                                                            "wins": 0
+                                                                                                                                        },
+                                                                                                                                        {
+                                                                                                                                            "children": [
+                                                                                                                                                {
+                                                                                                                                                    "children": [],
+                                                                                                                                                    "move": "0,1,h",
+                                                                                                                                                    "plays": 1,
+                                                                                                                                                    "wins": 0
+                                                                                                                                                },
+                                                                                                                                                {
+                                                                                                                                                    "children": [],
+                                                                                                                                                    "move": "0,2,h",
+                                                                                                                                                    "plays": 1,
+                                                                                                                                                    "wins": 1
+                                                                                                                                                },
+                                                                                                                                                {
+                                                                                                                                                    "children": [],
+                                                                                                                                                    "move": "0,2,v",
+                                                                                                                                                    "plays": 1,
+                                                                                                                                                    "wins": 1
+                                                                                                                                                },
+                                                                                                                                                {
+                                                                                                                                                    "children": [],
+                                                                                                                                                    "move": "2,3,v",
+                                                                                                                                                    "plays": 1,
+                                                                                                                                                    "wins": 1
+                                                                                                                                                },
+                                                                                                                                                {
+                                                                                                                                                    "children": [
+                                                                                                                                                        {
+                                                                                                                                                            "children": [],
+                                                                                                                                                            "move": "1,1,v",
+                                                                                                                                                            "plays": 1,
+                                                                                                                                                            "wins": 1
+                                                                                                                                                        },
+                                                                                                                                                        {
+                                                                                                                                                            "children": [],
+                                                                                                                                                            "move": "2,1,v",
+                                                                                                                                                            "plays": 1,
+                                                                                                                                                            "wins": 0
+                                                                                                                                                        },
+                                                                                                                                                        {
+                                                                                                                                                            "children": [],
+                                                                                                                                                            "move": "2,3,v",
+                                                                                                                                                            "plays": 1,
+                                                                                                                                                            "wins": 0
+                                                                                                                                                        },
+                                                                                                                                                        {
+                                                                                                                                                            "children": [],
+                                                                                                                                                            "move": "3,2,h",
+                                                                                                                                                            "plays": 1,
+                                                                                                                                                            "wins": 0
+                                                                                                                                                        },
+                                                                                                                                                        {
+                                                                                                                                                            "children": [
+                                                                                                                                                                {
+                                                                                                                                                                    "children": [],
+                                                                                                                                                                    "move": "0,1,v",
+                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                    "wins": 0
+                                                                                                                                                                },
+                                                                                                                                                                {
+                                                                                                                                                                    "children": [],
+                                                                                                                                                                    "move": "1,0,h",
+                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                    "wins": 1
+                                                                                                                                                                },
+                                                                                                                                                                {
+                                                                                                                                                                    "children": [],
+                                                                                                                                                                    "move": "2,0,v",
+                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                    "wins": 1
+                                                                                                                                                                },
+                                                                                                                                                                {
+                                                                                                                                                                    "children": [],
+                                                                                                                                                                    "move": "2,1,v",
+                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                    "wins": 1
+                                                                                                                                                                },
+                                                                                                                                                                {
+                                                                                                                                                                    "children": [
+                                                                                                                                                                        {
+                                                                                                                                                                            "children": [],
+                                                                                                                                                                            "move": "0,0,h",
+                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                            "wins": 0
+                                                                                                                                                                        },
+                                                                                                                                                                        {
+                                                                                                                                                                            "children": [],
+                                                                                                                                                                            "move": "0,0,v",
+                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                            "wins": 0
+                                                                                                                                                                        },
+                                                                                                                                                                        {
+                                                                                                                                                                            "children": [],
+                                                                                                                                                                            "move": "0,0,v",
+                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                            "wins": 1
+                                                                                                                                                                        },
+                                                                                                                                                                        {
+                                                                                                                                                                            "children": [],
+                                                                                                                                                                            "move": "1,1,v",
+                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                            "wins": 0
+                                                                                                                                                                        },
+                                                                                                                                                                        {
+                                                                                                                                                                            "children": [
+                                                                                                                                                                                {
+                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                    "move": "0,2,h",
+                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                    "wins": 0
+                                                                                                                                                                                },
+                                                                                                                                                                                {
+                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                    "move": "2,0,h",
+                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                    "wins": 1
+                                                                                                                                                                                },
+                                                                                                                                                                                {
+                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                    "move": "2,2,h",
+                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                    "wins": 1
+                                                                                                                                                                                },
+                                                                                                                                                                                {
+                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                    "move": "3,2,h",
+                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                    "wins": 1
+                                                                                                                                                                                },
+                                                                                                                                                                                {
+                                                                                                                                                                                    "children": [
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "children": [],
+                                                                                                                                                                                            "move": "0,0,v",
+                                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                                            "wins": 0
+                                                                                                                                                                                        },
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "children": [],
+                                                                                                                                                                                            "move": "1,1,h",
+                                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                                            "wins": 0
+                                                                                                                                                                                        },
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "children": [],
+                                                                                                                                                                                            "move": "1,2,h",
+                                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                                            "wins": 0
+                                                                                                                                                                                        },
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "children": [],
+                                                                                                                                                                                            "move": "2,1,v",
+                                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                                            "wins": 1
+                                                                                                                                                                                        },
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                                    "move": "0,1,h",
+                                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                                    "wins": 0
+                                                                                                                                                                                                },
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                                    "move": "1,2,h",
+                                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                                    "wins": 1
+                                                                                                                                                                                                },
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                                    "move": "2,1,h",
+                                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                                    "wins": 0
+                                                                                                                                                                                                },
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                                    "move": "2,1,h",
+                                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                                    "wins": 1
+                                                                                                                                                                                                },
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                                    "move": "2,1,h",
+                                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                                    "wins": 1
+                                                                                                                                                                                                }
+                                                                                                                                                                                            ],
+                                                                                                                                                                                            "move": "1,1,h",
+                                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                                            "wins": 1
+                                                                                                                                                                                        }
+                                                                                                                                                                                    ],
+                                                                                                                                                                                    "move": "0,0,h",
+                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                    "wins": 0
+                                                                                                                                                                                }
+                                                                                                                                                                            ],
+                                                                                                                                                                            "move": "3,0,h",
+                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                            "wins": 1
+                                                                                                                                                                        }
+                                                                                                                                                                    ],
+                                                                                                                                                                    "move": "0,1,v",
+                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                    "wins": 0
+                                                                                                                                                                }
+                                                                                                                                                            ],
+                                                                                                                                                            "move": "2,1,v",
+                                                                                                                                                            "plays": 1,
+                                                                                                                                                            "wins": 1
+                                                                                                                                                        }
+                                                                                                                                                    ],
+                                                                                                                                                    "move": "1,0,v",
+                                                                                                                                                    "plays": 1,
+                                                                                                                                                    "wins": 0
+                                                                                                                                                }
+                                                                                                                                            ],
+                                                                                                                                            "move": "0,2,h",
+                                                                                                                                            "plays": 1,
+                                                                                                                                            "wins": 1
+                                                                                                                                        }
+                                                                                                                                    ],
+                                                                                                                                    "move": "3,2,h",
+                                                                                                                                    "plays": 1,
+                                                                                                                                    "wins": 0
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "move": "0,2,v",
+                                                                                                                            "plays": 1,
+                                                                                                                            "wins": 1
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "move": "2,0,h",
+                                                                                                                    "plays": 1,
+                                                                                                                    "wins": 0
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "move": "2,2,h",
+                                                                                                            "plays": 1,
+                                                                                                            "wins": 1
+                                                                                                        }
+                                                                                                    ],
+                                                                                                    "move": "3,1,h",
+                                                                                                    "plays": 1,
+                                                                                                    "wins": 0
+                                                                                                }
+                                                                                            ],
+                                                                                            "move": "1,1,v",
+                                                                                            "plays": 1,
+                                                                                            "wins": 1
+                                                                                        }
+                                                                                    ],
+                                                                                    "move": "2,3,v",
+                                                                                    "plays": 1,
+                                                                                    "wins": 0
+                                                                                }
+                                                                            ],
+                                                                            "move": "1,3,v",
+                                                                            "plays": 1,
+                                                                            "wins": 1
+                                                                        }
+                                                                    ],
+                                                                    "move": "1,2,h",
+                                                                    "plays": 1,
+                                                                    "wins": 0
+                                                                }
+                                                            ],
+                                                            "move": "2,2,v",
+                                                            "plays": 1,
+                                                            "wins": 1
+                                                        }
+                                                    ],
+                                                    "move": "0,0,v",
+                                                    "plays": 1,
+                                                    "wins": 0
+                                                }
+                                            ],
+                                            "move": "2,1,h",
+                                            "plays": 1,
+                                            "wins": 1
+                                        }
+                                    ],
+                                    "move": "2,0,v",
+                                    "plays": 1,
+                                    "wins": 0
+                                }
+                            ],
+                            "move": "1,0,h",
+                            "plays": 1,
+                            "wins": 1
+                        }
+                    ],
+                    "move": "1,2,v",
+                    "plays": 1,
+                    "wins": 0
+                }
+            ],
+            "move": "0,3,v",
+            "plays": 2,
+            "wins": 2
+        },
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "children": [
+                                {
+                                    "children": [
+                                        {
+                                            "children": [
+                                                {
+                                                    "children": [
+                                                        {
+                                                            "children": [
+                                                                {
+                                                                    "children": [
+                                                                        {
+                                                                            "children": [
+                                                                                {
+                                                                                    "children": [
+                                                                                        {
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "children": [
+                                                                                                                                {
+                                                                                                                                    "children": [
+                                                                                                                                        {
+                                                                                                                                            "children": [
+                                                                                                                                                {
+                                                                                                                                                    "children": [
+                                                                                                                                                        {
+                                                                                                                                                            "children": [
+                                                                                                                                                                {
+                                                                                                                                                                    "children": [
+                                                                                                                                                                        {
+                                                                                                                                                                            "children": [
+                                                                                                                                                                                {
+                                                                                                                                                                                    "children": [
+                                                                                                                                                                                        {
+                                                                                                                                                                                            "children": [
+                                                                                                                                                                                                {
+                                                                                                                                                                                                    "children": [],
+                                                                                                                                                                                                    "move": "2,0,v",
+                                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                                    "wins": 1
+                                                                                                                                                                                                }
+                                                                                                                                                                                            ],
+                                                                                                                                                                                            "move": "2,1,v",
+                                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                                            "wins": 0
+                                                                                                                                                                                        }
+                                                                                                                                                                                    ],
+                                                                                                                                                                                    "move": "0,1,v",
+                                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                                    "wins": 1
+                                                                                                                                                                                }
+                                                                                                                                                                            ],
+                                                                                                                                                                            "move": "1,1,h",
+                                                                                                                                                                            "plays": 1,
+                                                                                                                                                                            "wins": 0
+                                                                                                                                                                        }
+                                                                                                                                                                    ],
+                                                                                                                                                                    "move": "0,2,h",
+                                                                                                                                                                    "plays": 1,
+                                                                                                                                                                    "wins": 1
+                                                                                                                                                                }
+                                                                                                                                                            ],
+                                                                                                                                                            "move": "2,2,h",
+                                                                                                                                                            "plays": 1,
+                                                                                                                                                            "wins": 0
+                                                                                                                                                        }
+                                                                                                                                                    ],
+                                                                                                                                                    "move": "1,0,v",
+                                                                                                                                                    "plays": 1,
+                                                                                                                                                    "wins": 1
+                                                                                                                                                }
+                                                                                                                                            ],
+                                                                                                                                            "move": "1,1,v",
+                                                                                                                                            "plays": 1,
+                                                                                                                                            "wins": 0
+                                                                                                                                        }
+                                                                                                                                    ],
+                                                                                                                                    "move": "2,0,h",
+                                                                                                                                    "plays": 1,
+                                                                                                                                    "wins": 1
+                                                                                                                                }
+                                                                                                                            ],
+                                                                                                                            "move": "2,3,v",
+                                                                                                                            "plays": 1,
+                                                                                                                            "wins": 0
+                                                                                                                        }
+                                                                                                                    ],
+                                                                                                                    "move": "1,2,v",
+                                                                                                                    "plays": 1,
+                                                                                                                    "wins": 1
+                                                                                                                }
+                                                                                                            ],
+                                                                                                            "move": "0,0,h",
+                                                                                                            "plays": 1,
+                                                                                                            "wins": 0
+                                                                                                        }
+                                                                                                    ],
+                                                                                                    "move": "1,2,h",
+                                                                                                    "plays": 1,
+                                                                                                    "wins": 1
+                                                                                                }
+                                                                                            ],
+                                                                                            "move": "1,0,h",
+                                                                                            "plays": 1,
+                                                                                            "wins": 0
+                                                                                        }
+                                                                                    ],
+                                                                                    "move": "0,1,h",
+                                                                                    "plays": 1,
+                                                                                    "wins": 1
+                                                                                }
+                                                                            ],
+                                                                            "move": "0,0,v",
+                                                                            "plays": 1,
+                                                                            "wins": 0
+                                                                        }
+                                                                    ],
+                                                                    "move": "3,2,h",
+                                                                    "plays": 1,
+                                                                    "wins": 1
+                                                                }
+                                                            ],
+                                                            "move": "3,0,h",
+                                                            "plays": 1,
+                                                            "wins": 0
+                                                        }
+                                                    ],
+                                                    "move": "2,1,h",
+                                                    "plays": 1,
+                                                    "wins": 1
+                                                }
+                                            ],
+                                            "move": "0,3,v",
+                                            "plays": 1,
+                                            "wins": 0
+                                        }
+                                    ],
+                                    "move": "3,1,h",
+                                    "plays": 1,
+                                    "wins": 1
+                                }
+                            ],
+                            "move": "2,2,v",
+                            "plays": 1,
+                            "wins": 0
+                        }
+                    ],
+                    "move": "1,3,v",
+                    "plays": 1,
+                    "wins": 1
+                }
+            ],
+            "move": "0,2,v",
+            "plays": 2,
+            "wins": 0
+        }
+    ]
+}
