@@ -46,6 +46,7 @@ E.g
 * **$3** — Number of games
 * **$4** — Rows 
 * **$5** — Columns 
+
 E.g
 
     $ bash play_nxm_games_extended.sh v1 v2 20 5 5  P L 
