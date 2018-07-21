@@ -1,13 +1,6 @@
 Dots and Boxes application
 ==========================
 
- Demo agent & Server from [insert githubproject]
-
-code voor versie 1 is te vinden in bestand x
-
-Dots and Boxes application
-==========================
-
 ![Screenshot of Dots and Boxes](https://people.cs.kuleuven.be/wannes.meert/dotsandboxes/screenshot.png?v=2)
 
 This setup is part of the course "Machine Learning: Project" (KU Leuven,
