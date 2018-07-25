@@ -30,6 +30,11 @@ Or alternatively, you can start the app using the included simple server:
 
 The game can then be played by directing your browser to http://127.0.0.1:8001.
 
+Flow of the code
+------------------
+`dotsandboxescompete.py` creates a .json game file which contains the winner in it's filename
+The `parser.py` uses this game-XX-XX.json file to create yet another .json file which the 
+`learner.py` can process to make yet another .json file which is the tree data for MCTS. 
 
 
 Run simulations of the game

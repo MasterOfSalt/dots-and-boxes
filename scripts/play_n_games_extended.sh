@@ -12,8 +12,8 @@
 #parser         To automatically parse the simulated games
 #learner        To automatic feed/learn this parsed data into our json tree data (only relevant to mcts)
 
-# EXAMPLE:      bash play_nxm_games.sh v1 v2 
-#               bash play_nxm_games.sh v1 v2 20 5 5  P L 
+# EXAMPLE:      bash play_n_games_extended.sh v1 v2 
+#               bash play_n_games_extended.sh v1 v5 10 3 3  P L 
 
 p1=$1
 p2=$2
@@ -86,11 +86,11 @@ fi
 
 if [ "$parser" == "P" ]; then
 	echo "Started parsing..."
-    python3 parser.py
+    python3 ../agents/parser.py
     echo "done parsing"
     if [ "$learner" == "L" ]; then
         echo "Started learning..."
-        python3 learner.py
+        python3 ../agents/learner.py
         echo "done learning"
     else
         echo "data not learned"

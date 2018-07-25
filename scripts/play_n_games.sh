@@ -1,13 +1,13 @@
 #!/bin/bash
 #
-# EXAMPLE:      bash play_n_games.sh 10 v1 v2 4 4
+# EXAMPLE:      bash play_n_games.sh v1 v2 10 4 4
 # 
 
 p1=$1
 p2=$2
 N=$3
-C=$4
-R=$5
+R=$4
+C=$5
 
 if [ "$p1" == "v1" ]; then	ipaddr1="ws://127.0.0.1:2001"; fi
 if [ "$p1" == "v2" ]; then	ipaddr1="ws://127.0.0.1:2002"; fi
