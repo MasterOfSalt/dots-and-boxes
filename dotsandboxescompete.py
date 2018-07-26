@@ -59,6 +59,40 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             msg["player"] = 2
             await websocket2.send(json.dumps(msg))
             moves = []
+            
+            player1 = "player1"
+            player2 = "player2"
+            if uri1 == "ws://localhost:2001" or uri1 == "ws://127.0.0.1:2001":
+                p1 = "v1"
+                player1 = "V1:RANDOM"
+            if uri1 == "ws://localhost:2002" or uri1 == "ws://127.0.0.1:2002":
+                p1 = "v2"
+                player1 = "V2:ALPHABETA"
+            if uri1 == "ws://localhost:2003" or uri1 == "ws://127.0.0.1:2003":
+                p1 = "v3"
+                player1 = "V3:HEURISTIC"
+            if uri1 == "ws://localhost:20031" or uri1 == "ws://127.0.0.1:20031":
+                p1 = "v3b"
+                player1 = "V3:HEURISTICb"
+            if uri1 == "ws://localhost:2005" or uri1 == "ws://127.0.0.1:2005":
+                p1 = "v5"
+                player1 = "V5:Monte"
+            if uri2 == "ws://localhost:2001" or uri2 == "ws://127.0.0.1:2001":
+                p2 = "v1"
+                player2 = "V1:RANDOM"
+            if uri2 == "ws://localhost:2002" or uri2 == "ws://127.0.0.1:2002":
+                p2 = "v2"
+                player2 = "V2:ALPHABETA"
+            if uri2 == "ws://localhost:2003" or uri2 == "ws://127.0.0.1:2003":
+                p2 = "v3"
+                player2 = "V3:HEURISTIC"
+            if uri2 == "ws://localhost:20031" or uri2 == "ws://127.0.0.1:20031":
+                p2 = "v3b"
+                player2 = "V3:HEURISTICb"
+            if uri2 == "ws://localhost:2005" or uri2 == "ws://127.0.0.1:2005":
+                p2 = "v5"
+                player2 = "V5:Monte"
+                
             # Run game
             while winner is None:
                 ask_time = time.time()
@@ -85,6 +119,8 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                 next_player = user_action(r, c, o, cur_player,
                                           cells, points,
                                           nb_rows, nb_cols)
+
+                    
                 if points[1] + points[2] == nb_cols * nb_rows:
                     # Game over
                     winner = 1
@@ -95,19 +131,21 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                         winner = 0
                     if points[2] > points[1]:
                         winner = 2
-                    folder = str(nb_rows) + "x" + str(nb_cols)
-                    name = "game-"+str(nb_rows)+"-"+str(nb_cols)+"-"+str(id)+"_"+str(winner)+".json"
-                    
                         
-                    if not os.path.exists("data/"+folder):
-                        if uri1 == "ws://127.0.0.1:2005" or uri2 == "ws://127.0.0.1:2005":
-                            os.makedirs("../data/version5/"+folder+"/unprocessed/", exist_ok=True)
-                            jfile = open("../data/version5/"+folder+"/unprocessed/"+name,'w+')
-                            json.dump(moves,jfile)
-                        else:
-                            os.makedirs("../data/"+folder, exist_ok=True)
-                            jfile = open("../data/"+folder+"/"+name,'w+')
-                            json.dump(moves,jfile)
+                    folder = str(nb_rows) + "x" + str(nb_cols)
+                    name = "game-"+str(nb_rows)+"-"+str(nb_cols)+"-"+str(id)+"-"+str(p1)+"-"+str(p2)+"_"+str(winner)+".json"
+                    '''
+                            if not os.path.exists("data/"+folder):
+                            if uri1 == "ws://127.0.0.1:2005" or uri2 == "ws://127.0.0.1:2005":
+                                os.makedirs("../data/version5/"+folder+"/unprocessed/", exist_ok=True)
+                                jfile = open("../data/version5/"+folder+"/unprocessed/"+name,'w+')
+                                json.dump(moves,jfile)
+                            else:
+                    '''
+                    os.makedirs("../data/"+folder, exist_ok=True)
+                    jfile = open("../data/"+folder+"/unprocessed/"+name,'w+')
+                    json.dump(moves,jfile)
+
                 else:
                     msg = {
                         "type": "action",
@@ -137,24 +175,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             }
             f = open('../data/data.csv', 'a')
             writer = csv.writer(f)
-            player1 = "player1"
-            player2 = "player2"
-            if uri1 == "ws://localhost:2001" or uri1 == "ws://127.0.0.1:2001":
-                player1 = "V1:RANDOM"
-            if uri1 == "ws://localhost:2002" or uri1 == "ws://127.0.0.1:2002":
-                player1 = "V2:ALPHABETA"
-            if uri1 == "ws://localhost:2003" or uri1 == "ws://127.0.0.1:2003":
-                player1 = "V3:HEURISTIC"
-            if uri1 == "ws://localhost:2005" or uri1 == "ws://127.0.0.1:2005":
-                player1 = "V5:Monte"
-            if uri2 == "ws://localhost:2001" or uri2 == "ws://127.0.0.1:2001":
-                player2 = "V1:RANDOM"
-            if uri2 == "ws://localhost:2002" or uri2 == "ws://127.0.0.1:2002":
-                player2 = "V2:ALPHABETA"
-            if uri2 == "ws://localhost:2003" or uri2 == "ws://127.0.0.1:2003":
-                player2 = "V3:HEURISTIC"
-            if uri2 == "ws://localhost:2005" or uri2 == "ws://127.0.0.1:2005":
-                player2 = "V5:Monte"
+            
             if winner == 1:
                 winnerstring = player1
             else:
@@ -180,13 +201,13 @@ def user_action(r, c, o, cur_player, cells, points, nb_rows, nb_cols):
     logger.info("User action: player={} - r={} - c={} - o={}".format(cur_player, r, c, o))
     next_player = cur_player
     won_cell = False
-    cell = cells[r][c]
+    cell = cells[int(r)][int(c)]
     if o == "h":
         if cell["h"] != 0:
             return cur_player
         cell["h"] = cur_player
         # Above
-        if r > 0:
+        if int(r) > 0:
             if cells[r - 1][c]["v"] != 0 \
                 and cells[r - 1][c + 1]["v"] != 0 \
                 and cells[r - 1][c]["h"] != 0 \
@@ -195,7 +216,7 @@ def user_action(r, c, o, cur_player, cells, points, nb_rows, nb_cols):
                 points[cur_player] += 1
                 cells[r - 1][c]["p"] = cur_player
         # Below
-        if r < nb_rows:
+        if int(r) < nb_rows:
             if cells[r][c]["v"] != 0 \
                 and cells[r][c + 1]["v"] != 0 \
                 and cells[r][c]["h"] != 0 \
@@ -209,8 +230,8 @@ def user_action(r, c, o, cur_player, cells, points, nb_rows, nb_cols):
             return cur_player
         cell["v"] = cur_player;
         # Left
-        if c > 0:
-            if cells[r][c - 1]["v"] != 0 \
+        if int(c) > 0:
+            if cells[int(r)][int(c) - 1]["v"] != 0 \
                 and cells[r][c]["v"] != 0 \
                 and cells[r][c - 1]["h"] != 0 \
                 and cells[r + 1][c - 1]["h"] != 0:
@@ -218,11 +239,11 @@ def user_action(r, c, o, cur_player, cells, points, nb_rows, nb_cols):
                 points[cur_player] += 1
                 cells[r][c - 1]["p"] = cur_player
         # Right
-        if c < nb_cols:
-            if cells[r][c]["v"] != 0 \
-                and cells[r][c + 1]["v"] != 0 \
-                and cells[r][c]["h"] != 0 \
-                and cells[r + 1][c]["h"] != 0:
+        if int(c) < nb_cols:
+            if cells[int(r)][int(c)]["v"] != 0 \
+                and cells[int(r)][int(c) + 1]["v"] != 0 \
+                and cells[int(r)][int(c)]["h"] != 0 \
+                and cells[int(r) + 1][int(c)]["h"] != 0:
                 won_cell = True
                 points[cur_player] += 1
                 cells[r][c]["p"] = cur_player

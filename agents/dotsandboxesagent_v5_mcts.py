@@ -18,6 +18,8 @@ from collections import defaultdict
 import random
 from boards.mcst import MonteCarloSearchTree
 from boards.board import Board
+import version3.heuristics as heuristics
+
 
 logger = logging.getLogger(__name__)
 games = {}

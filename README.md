@@ -11,8 +11,7 @@ Faculty of engineering, Department of Computer Science,
 Installation
 ------------
 
-The example agent is designed for Python 3.6 and requires the
-[websockets](https://websockets.readthedocs.io) package. Dependencies can be
+The example agent is designed for Python 3.6. Dependencies can be
 installed using pip:
 
     $ pip install -r requirements.txt
@@ -30,11 +29,13 @@ Or alternatively, you can start the app using the included simple server:
 
 The game can then be played by directing your browser to http://127.0.0.1:8001.
 
-Flow of the code
+Flow
 ------------------
 `dotsandboxescompete.py` creates a .json game file which contains the winner in it's filename
 The `parser.py` uses this game-XX-XX.json file to create yet another .json file which the 
 `learner.py` can process to make yet another .json file which is the tree data for MCTS. 
+
+Run the Parser: e.g. `parser.py 3 4`. This parses all unprocessed 3x4 games.   
 
 
 Run simulations of the game
@@ -44,13 +45,15 @@ and immediatly parse/learn them.
 
 E.g
 
-    $ bash play_n_games.sh v1 v2 10 4 4
+    $ bash play_n_games.sh v1 v2 10 4 4 P L 
     
 * **$1** — Player 1 (this can be "v1","v2","v3",...)
 * **$2** — Player 1 (this can be "v1","v2","v3",...)
 * **$3** — Number of games
 * **$4** — Rows 
 * **$5** — Columns 
+* **$6** — Parse the data afterwards
+* **$7** — Learn the data afterwards
 
 E.g
 
@@ -59,7 +62,7 @@ E.g
 * **$4** — Rows (actually permutations up to this column).
 * **$5** — Columns (actually permutations up to this column).
 * **$6** — Parse the data afterwards
-* **$7** — Learn the data afterwards (option requires Parsing)
+* **$7** — Learn the data afterwards
 
 Start the agent client
 ----------------------

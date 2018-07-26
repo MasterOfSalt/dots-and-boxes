@@ -12,7 +12,7 @@ allgames = []
 
 
 
-with open('data.csv') as csvfile:
+with open('../data/data.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     for row in readCSV:
         added = False
@@ -36,5 +36,5 @@ with open('data.csv') as csvfile:
                     game['player2_win'] = 1
                     game['dimensions'] = row[3]
                 allgames.append(game)
-with open('test.json', 'w') as outfile:
+with open('../data/parsedgames.json', 'w') as outfile:
     json.dump(allgames, outfile)

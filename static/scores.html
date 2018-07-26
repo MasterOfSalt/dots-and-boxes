@@ -1,58 +1,55 @@
 <!DOCTYPE html>
 <html>
-<html lang="en">
-<meta charset="utf-8">
-<meta name="author" content="Wannes Meert">
-<meta name="description" content="Dots-and-Boxes game. Part of the Machine Learning: Project course at KU Leuven (Hendrik Blockeel, Wannes Meert).">
-<meta name="keywords" content="artificial intelligence,AI,machine learning,dots and boxes,KU Leuven">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Dots and Boxes</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="dotsandboxes.css">
-</head>
-<body>
-<div class="container">
-<h1>Dots and Boxes: Scores</h1>
-<div class="topnav" id="myTopnav">
-<a href="dotsandboxes.html" class="active">Game</a>
-<a href="scores.html">Scores</a>
-<i class="fa fa-bars"></i>
-</a>
-</div>
-<div id="scores" class="row">
+    <html lang="en">
+        <meta charset="utf-8">
+        <meta name="author" content="Wannes Meert">
+        <meta name="description" content="Dots-and-Boxes game. Part of the Machine Learning: Project course at KU Leuven (Hendrik Blockeel, Wannes Meert).">
+        <meta name="keywords" content="artificial intelligence,AI,machine learning,dots and boxes,KU Leuven">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Dots and Boxes</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="dotsandboxes.css">
+        <body>
+            <div class="container">
+                <h1>Dots and Boxes: Scores</h1>
+                <div class="topnav" id="myTopnav">
+                    <a href="dotsandboxes.html" class="active">Game</a>
+                    <a href="scores.html">Scores</a>
+                    <i class="fa fa-bars"></i>
+                </div>
+                <div id="scores" class="row">
 
-	<script>
-
-$.getJSON("../testing/test.json", function(json) {
-	$(document).ready(function () {
-    var html = '<table class="table table-striped">';
-    html += '<tr>';
-    var flag = 0;
-    $.each(json[0], function(index, value){
-        html += '<th>'+index+'</th>';
-    });
-    html += '</tr>';
-     $.each(json, function(index, value){
-         html += '<tr>';
-        $.each(value, function(index2, value2){
-            html += '<td>'+value2+'</td>';
-        });
-        html += '<tr>';
-     });
-     html += '</table>';
-     $('#scores').html(html);
-});
-});
+                    <script>
+                        $.getJSON("../data/parsedgames.json", function(json) {
+                            $(document).ready(function () {
+                                var html = '<table class="table table-striped">';
+                                html += '<tr>';
+                                var flag = 0;
+                                $.each(json[0], function(index, value){
+                                    html += '<th>'+index+'</th>';
+                                });
+                                html += '</tr>';
+                                $.each(json, function(index, value){
+                                    html += '<tr>';
+                                    $.each(value, function(index2, value2){
+                                        html += '<td>'+value2+'</td>';
+                                    });
+                                    html += '<tr>';
+                                });
+                                html += '</table>';
+                                $('#scores').html(html);
+                            });
+                        });
 
 
-	</script>
-</div>
-<div class="footer">
-<small>&copy; <a href="https://dtai.cs.kuleuven.be">DTAI Research Group</a>, KU Leuven &mdash; <a href="https://github.com/wannesm/dotsandboxes">Source</a></small>
-</div>
-</div>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="dotsandboxes.js"></script>
-</body>
-</html>
+                    </script>
+                </div>
+                <div class="footer">
+                    <small>&copy; <a href="https://dtai.cs.kuleuven.be">DTAI Research Group</a>, KU Leuven &mdash; <a href="https://github.com/wannesm/dotsandboxes">Source</a></small>
+                </div>
+            </div>
+            <script src="https://d3js.org/d3.v4.min.js"></script>
+            <script src="dotsandboxes.js"></script>
+        </body>
+    </html>
