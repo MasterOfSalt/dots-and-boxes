@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EXAMPLE:      bash play_n_games.sh v1 v2 10 4 4
+# EXAMPLE:      bash play_n_games.sh v1 v2 10 4 4 P L
 # 
 
 p1=$1
@@ -38,7 +38,7 @@ if [ "$parser" == "P" ]; then
     echo "done parsing"
     if [ "$learner" == "L" ]; then
         echo "Started learning..."
-        python3 ../agents/learner.py
+        python3 ../agents/learner.py $R $C
         echo "done learning"
     else
         echo "data not learned"

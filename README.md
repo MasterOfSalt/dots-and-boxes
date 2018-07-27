@@ -31,11 +31,12 @@ The game can then be played by directing your browser to http://127.0.0.1:8001.
 
 Flow
 ------------------
-`dotsandboxescompete.py` creates a .json game file which contains the winner in it's filename
-The `parser.py` uses this game-XX-XX.json file to create yet another .json file which the 
-`learner.py` can process to make yet another .json file which is the tree data for MCTS. 
+The `dotsandboxescompete.py` file creates a .json game file which contains the winner in it's filename
+The `learner.py` processes all the .json files of a specific board type andcreate a .json file of the tree data. 
+The `parser.py` uses this game-XX-XX.json file to create yet another .json file which serves our GUI.
 
-Run the Parser: e.g. `parser.py 3 4`. This parses all unprocessed 3x4 games.   
+Run the Parser: e.g. `parser.py`. This creates/appends a json file for the gui. (score.html)   
+Run the Leaner: e.g. `parser.py 3 4`. This learns all unprocessed 3x4 games.   
 
 
 Run simulations of the game
