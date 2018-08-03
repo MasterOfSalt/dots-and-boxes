@@ -13,6 +13,12 @@ def transform_horizontal_nxn(coord,n):
         return (n-x)-1,y,o
 
 
+def transform_vertical_nxn(coord,n):
+    x,y,o = coord
+    if o == "h":
+        return x,(n-y-1),o
+    if o == "v":
+        return x,(n-x),o
 
 
 
