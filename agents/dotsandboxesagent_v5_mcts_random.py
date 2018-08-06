@@ -83,22 +83,9 @@ class DotsAndBoxesAgent:
                 .format(self.board.nb_rows, self.board.nb_cols, self.player))
 
         free_lines = self.board.free_lines()
-<<<<<<< HEAD:agents/dotsandboxesagent_v5_mcts.py
         used_lines = self.board.used_lines()
         
 
-=======
-        #used_lines = self.board.used_lines()
-
-        # for x in range(0, len(used_lines)):
-        #     print ('Final x = %d' % (x))
-
-        # logger.info("Free lines: ")
-        # logger.info(free_lines)
-        # print ('      ')
-        # logger.info("Used lines: ")
-        # logger.info(used_lines)
->>>>>>> 0ad885b7b205c3716ef636cc66866e179a2a77ac:agents/dotsandboxesagent_v5_mcts_random.py
         if len(free_lines) == 0:
             # Board full
             return None
@@ -109,6 +96,7 @@ class DotsAndBoxesAgent:
             r, c, o = free_lines[movei]
             print("RANDOM MOVE MCTS")
             return r, c, o
+        
         else:
             print("MCTS tree.data MOVE")
             r,c,o = s.split(",")
