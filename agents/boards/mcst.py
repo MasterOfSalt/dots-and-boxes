@@ -8,9 +8,9 @@ import sys
 import glob
 import errno
 from os import path
-
+import itertools as it
 class MonteCarloSearchTree:
-    
+
     def __init__(self,n,m):
         self.dimensions = '../data/'+str(n) + 'x' +str(m)
         self.tree = {}
@@ -31,8 +31,8 @@ class MonteCarloSearchTree:
 
         """method description
         Indien de game een win was:
-            
-        """     
+
+        """
     def explore_new_nodes(self,nodelist,nodes,win):
         for move in nodelist:
             if win:
@@ -52,7 +52,15 @@ class MonteCarloSearchTree:
                 })
                 win = True
             nodes = nodes[0]['children']
-
+    def explore_new_nodes_no_winner(self,nodelist,nodes):
+        for move in nodelist:
+            nodes.append({
+                    'wins': 0,
+                    'plays': 1,
+                    'move': move,
+                    'children':[]
+                })
+            nodes = nodes[0]['children']
     def get_best_move(self,nodes):
         winrate = -1
         next_move = False
@@ -67,8 +75,81 @@ class MonteCarloSearchTree:
                 return node
         return False
 
+    def add_sequence_to_tree(self,last,combo,winner):
+        nodes = self.tree['nodes']
+        found = True
+        while(len(combo)>0 and found):
+            found = False
+            move = combo.pop(0)
+            for node in nodes:
+                if node['move'] == move:
+                    nodes = node['children']
+                    found = True
+                    break
+        if len(combo)>0:
+            for move in combo:
+                nodes.append({
+                        'wins': 0,
+                        'plays': 0,
+                        'move': move,
+                        'children':[]
+                    })
+                nodes = nodes[0]['children']
+        if(winner == 1 and (len(combo) + 1)%2 == 0):
+            nodes.append({
+                    'wins': 0,
+                    'plays': 1,
+                    'move': last,
+                    'children':[]
+                })
+        if(winner == 1 and (len(combo) + 1)%2 != 0):
+            nodes.append({
+                    'wins': 1,
+                    'plays': 1,
+                    'move': last,
+                    'children':[]
+                })
+        if(winner == 2 and (len(combo) + 1)%2 == 0):
+            nodes.append({
+                    'wins': 1,
+                    'plays': 1,
+                    'move': last,
+                    'children':[]
+                })
+        if(winner == 2 and (len(combo) + 1)%2 != 0):
+            nodes.append({
+                    'wins': 0,
+                    'plays': 99,
+                    'move': last,
+                    'children':[]
+                })
+        if(winner == 0):
+            nodes.append({
+                    'wins': 0,
+                    'plays': 1,
+                    'move': last,
+                    'children':[]
+                })
+
+    def add_all_sequences(self,my_list,winner):
+        subs = [[]]
+        for i in range(len(my_list)):
+            n = i+1
+            while n <= len(my_list):
+                sub = my_list[i:n]
+                subs.append(sub)
+                n += 1
+        for steak_cheese in subs:
+            if len(steak_cheese) > 1:
+                last = steak_cheese.pop()
+                combos = list(it.combinations(steak_cheese, len(steak_cheese)))
+                for combo in combos:
+                    self.add_sequence_to_tree(last,list(combo),winner)
+
+
 
     def add_game(self,nodelist,winner):
+        self.add_all_sequences(nodelist,winner)
         go = True
         if(winner == 1):
             win = True
@@ -81,13 +162,13 @@ class MonteCarloSearchTree:
                 done = False
                 move = nodelist.pop(0)
                 for node in nodes:
-                    if node['move'] == el:
+                    if node['move'] == move:
                         node['plays'] += 1
                         nodes = node['children']
                         done = True
                         break
                 if not done:
-                    self.explore_new_nodes([move] + nodelist,nodes,win)
+                    self.explore_new_nodes_no_winner([move] + nodelist,nodes)
                     break
             '''  with open(self.dimensions+'/tree.data', 'w') as outfile:
                     json.dump(self.tree, outfile)
@@ -131,7 +212,7 @@ class MonteCarloSearchTree:
             except IOError as exc:
                 if exc.errno != errno.EISDIR:
                     raise
-                    
+
         with open(self.dimensions+'/tree.data', 'w') as outfile:
             json.dump(self.tree, outfile)
 
