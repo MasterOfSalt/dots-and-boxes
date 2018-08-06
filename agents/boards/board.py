@@ -90,7 +90,7 @@ class Board:
             visited_lines.append(line)
             if line_horizontal_left_up in used_lines and line_horizontal_left_up not in visited_lines:
                 current_chain_length += 1
-                self.chain_neighbors(line_horizontal_left_up, visited_lines,chain_boolean)
+                self.chain_neighbors(line_horizontal_left_up, visited_lines)
                 visited_lines.append(line_horizontal_left_up)
                 
             if line_horizontal_left_down in used_lines and line_horizontal_left_down not in visited_lines:
