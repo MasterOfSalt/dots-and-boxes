@@ -25,7 +25,6 @@ logger = logging.getLogger(__name__)
 games = {}
 agentclass = None
 
-
 class DotsAndBoxesAgent:
     """
     A DotsAndBoxesAgent object should implement the following methods:
@@ -52,6 +51,7 @@ class DotsAndBoxesAgent:
         self.tree = MonteCarloSearchTree(nb_rows,nb_cols)
         self.nodes = self.tree.tree['nodes']
         self.board = Board(nb_rows,nb_cols)
+        
 
 
 
@@ -60,6 +60,9 @@ class DotsAndBoxesAgent:
         self.player.add(player)
 
     def register_action(self, row, column, orientation, player):
+        visited_lines = []
+        count_chains = self.board.count_chains()
+        
         """
         Register action played in game.
         :param row:
@@ -81,15 +84,8 @@ class DotsAndBoxesAgent:
 
         free_lines = self.board.free_lines()
         used_lines = self.board.used_lines()
+        
 
-        for x in range(0, len(used_lines)):
-            print ('Final x = %d' % (x))
-
-        logger.info("Free lines: ")
-        logger.info(free_lines)
-        print ('      ')
-        logger.info("Used lines: ")
-        logger.info(used_lines)
         if len(free_lines) == 0:
             # Board full
             return None
@@ -105,6 +101,10 @@ class DotsAndBoxesAgent:
             print("MCTS tree.data MOVE")
             r,c,o = s.split(",")
             return r,c,o
+        
+
+
+        
     def end_game(self):
         self.ended = True
 
@@ -125,6 +125,9 @@ async def handler(websocket, path):
                 return False
             game = msg["game"]
             answer = None
+         
+
+        
             if msg["type"] == "start":
                 # Initialize game
                 if msg["game"] in games:
