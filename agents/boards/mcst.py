@@ -68,6 +68,8 @@ class MonteCarloSearchTree:
             if node['wins']/node['plays'] > winrate:
                 next_move = node['move']
         return next_move
+    
+    """ x = node['wins']/node['plays'] + sqrt(2*log(node['plays']/[node['plays']]))"""
 
     def fill_line(self,nodes,move):
         for node in nodes:

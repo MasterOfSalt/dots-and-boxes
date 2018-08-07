@@ -53,7 +53,6 @@ class Board:
   
     def chain_neighbors(self,line, visited_lines):
         global current_chain_length
-        global unique_chain
         if line not in visited_lines:
             used_lines = self.used_lines()
 
@@ -150,12 +149,10 @@ class Board:
 
         else:
             print ("In visited lines")
-            unique_chain = True
             
     current_chain_length = 0 
     chain_count = 0
-    unique_chain = False
-    
+
     def is_chain(self):
         global current_chain_length
         global chain_count
@@ -163,22 +160,25 @@ class Board:
         self.reset_chain_counter()
         used_lines = self.used_lines()
         print("----------------------------CHAIN ANALYSIS----------------------------")
+
         for line in used_lines:
             current_chain_length = 1
             chain_count = 0
             print("LINE IS:"+str(line))
 
             self.chain_neighbors(line, visited_lines)
-            if current_chain_length >= 3 and unique_chain is True:    
+            if current_chain_length >= 3:    
                 self.chain_counter()
-                print("EUREKA")
+                print("EUREKA chain ++")
                 
-            print("USED_LINES: "+str(used_lines))
             print('\n')
+            print("USED_LINES: "+str(used_lines))
             print("VISITED_LINES: "+str(visited_lines))
             print('\n')
             print("NEW Chain count: "+str(self.chain_count))
-            
+        
+        print("----------------------------end----------------------------")
+
     def chain_counter(self):
         global chain_count
         self.chain_count = self.chain_count+1    
