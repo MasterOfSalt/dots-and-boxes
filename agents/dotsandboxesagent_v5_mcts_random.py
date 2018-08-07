@@ -19,7 +19,7 @@ import random
 from boards.mcst import MonteCarloSearchTree
 from boards.board import Board
 import version3.heuristics as heuristics
-
+import timeit
 
 logger = logging.getLogger(__name__)
 games = {}

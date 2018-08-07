@@ -1,4 +1,5 @@
 import logging
+from timeit import Timer
 
 logger = logging.getLogger(__name__)
 
@@ -192,6 +193,8 @@ class Board:
         print (self.chain_count) 
         
     def count_chains(self):
+        t = Timer(lambda: self.is_chain())
+        print (t.timeit(number=1))
         global chain_count
         self.is_chain()
         

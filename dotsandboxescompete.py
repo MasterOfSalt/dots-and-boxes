@@ -64,34 +64,46 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             player2 = "player2"
             if uri1 == "ws://localhost:2001" or uri1 == "ws://127.0.0.1:2001":
                 p1 = "v1"
-                player1 = "V1:RANDOM"
+                player1 = "V1_RANDOM"
             if uri1 == "ws://localhost:2002" or uri1 == "ws://127.0.0.1:2002":
                 p1 = "v2"
-                player1 = "V2:ALPHABETA"
+                player1 = "V2_ALPHABETA"
             if uri1 == "ws://localhost:2003" or uri1 == "ws://127.0.0.1:2003":
                 p1 = "v3"
-                player1 = "V3:HEURISTIC"
+                player1 = "V3_HEURISTIC"
             if uri1 == "ws://localhost:20031" or uri1 == "ws://127.0.0.1:20031":
                 p1 = "v3b"
-                player1 = "V3:HEURISTICb"
+                player1 = "V3_HEURISTICb"
             if uri1 == "ws://localhost:2005" or uri1 == "ws://127.0.0.1:2005":
                 p1 = "v5"
-                player1 = "V5:Monte"
+                player1 = "V5_MCTS_always4never3"
+            if uri2 == "ws://localhost:20051" or uri2 == "ws://127.0.0.1:20051":
+                p2 = "v5"
+                player2 = "V5_MCTS_minimax_score"
+            if uri2 == "ws://localhost:20051" or uri2 == "ws://127.0.0.1:20051":
+                p2 = "v5"
+                player2 = "V5_MCTS_random"    
             if uri2 == "ws://localhost:2001" or uri2 == "ws://127.0.0.1:2001":
                 p2 = "v1"
-                player2 = "V1:RANDOM"
+                player2 = "V1_RANDOM"
             if uri2 == "ws://localhost:2002" or uri2 == "ws://127.0.0.1:2002":
                 p2 = "v2"
-                player2 = "V2:ALPHABETA"
+                player2 = "V2_ALPHABETA"
             if uri2 == "ws://localhost:2003" or uri2 == "ws://127.0.0.1:2003":
                 p2 = "v3"
-                player2 = "V3:HEURISTIC"
+                player2 = "V3_HEURISTIC"
             if uri2 == "ws://localhost:20031" or uri2 == "ws://127.0.0.1:20031":
                 p2 = "v3b"
-                player2 = "V3:HEURISTICb"
+                player2 = "V3_HEURISTICb"
             if uri2 == "ws://localhost:2005" or uri2 == "ws://127.0.0.1:2005":
                 p2 = "v5"
-                player2 = "V5:Monte"
+                player2 = "V5_MCTS_always4never3"
+            if uri2 == "ws://localhost:20051" or uri2 == "ws://127.0.0.1:20051":
+                p2 = "v5"
+                player2 = "V5_MCTS_minimax_score"
+            if uri2 == "ws://localhost:20052" or uri2 == "ws://127.0.0.1:20052":
+                p2 = "v5"
+                player2 = "V5_MCTS_random"
                 
             # Run game
             while winner is None:
