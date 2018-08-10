@@ -7,6 +7,9 @@ import os
 import sys
 import glob
 import errno
+from math import sqrt
+from math import log
+import cmath
 from os import path
 import itertools as it
 class MonteCarloSearchTree:
@@ -64,11 +67,24 @@ class MonteCarloSearchTree:
     def get_best_move(self,nodes):
         winrate = -1
         next_move = False
+        
         for node in nodes:
-            if node['wins']/node['plays'] > winrate:
-                next_move = node['move']
-        return next_move
-    
+            print (node['plays'])
+            if 'parentPlays' in node:
+                if node['plays'] is not 0:
+                    print (node['parentPlays'])
+                    print("YES")
+                    if (isinstance(cmath.sqrt(2*log(node['parentPlays']/node['plays'])), complex)):
+                        print("kak")
+                    else:
+                        if (node['wins']/node['plays'] + cmath.sqrt(2*log(node['parentPlays']/node['plays']))) > winrate:
+                            next_move = node['move']
+                        return next_move
+            else:
+                if (node['wins']/node['plays']) > winrate:
+                    next_move = node['move']
+                return next_move    
+            
     """ x = node['wins']/node['plays'] + sqrt(2*log(node['plays']/[node['plays']]))"""
 
     def fill_line(self,nodes,move):

@@ -149,7 +149,7 @@ class Board:
                 visited_lines.append(line_vertical_right_down)
 
         else:
-            print ("In visited lines")
+            """print ("In visited lines")"""
             
     current_chain_length = 0 
     chain_count = 0
@@ -160,25 +160,25 @@ class Board:
         visited_lines = []
         self.reset_chain_counter()
         used_lines = self.used_lines()
-        print("----------------------------CHAIN ANALYSIS----------------------------")
+        """print("----------------------------CHAIN ANALYSIS----------------------------")"""
 
         for line in used_lines:
             current_chain_length = 1
             chain_count = 0
-            print("LINE IS:"+str(line))
+            """print("LINE IS:"+str(line))"""
 
             self.chain_neighbors(line, visited_lines)
             if current_chain_length >= 3:    
                 self.chain_counter()
-                print("EUREKA chain ++")
+                """print("EUREKA chain ++")"""
                 
-            print('\n')
+            """print('\n')
             print("USED_LINES: "+str(used_lines))
             print("VISITED_LINES: "+str(visited_lines))
             print('\n')
             print("NEW Chain count: "+str(self.chain_count))
         
-        print("----------------------------end----------------------------")
+        print("----------------------------end----------------------------")"""
 
     def chain_counter(self):
         global chain_count
