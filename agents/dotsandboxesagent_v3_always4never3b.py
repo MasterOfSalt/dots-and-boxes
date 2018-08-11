@@ -2,6 +2,18 @@
 # encoding: utf-8
 from boards.strings_board import Strings_board
 import version3.heuristics as heuristics
+from boards.coins_strings_board import Coins_strings_board
+import version2.alpha_beta_v1_score as abv1
+import signal
+
+class TimeoutException(Exception):   # Custom exception class
+    pass
+
+def timeout_handler(signum, frame):   # Custom signal handler
+    raise TimeoutException
+
+# Change the behavior of SIGALRM
+signal.signal(signal.SIGALRM, timeout_handler)
 """
 dotsandboxesagent.py
 
@@ -49,13 +61,19 @@ class DotsAndBoxesAgent:
         self.timelimit = timelimit
         self.ended = False
         self.board = Strings_board(nb_rows,nb_cols)
-        
+
+        self.board2 = Coins_strings_board(nb_rows+1,nb_cols+1)
         self.odds = []
+        self.evens = []
+
         i = 0
         while i<120:
-            if(i%2!=0):
+            if(i%2==0):
+                self.evens.append(i)
+            else:
                 self.odds.append(i)
             i += 1
+
 
     def add_player(self, player):
         """Use the same agent for multiple players."""
@@ -76,6 +94,13 @@ class DotsAndBoxesAgent:
             y = column
             x = self.odds[row]
         self.board.fill_line(x,y)
+        if (orientation == "h"):
+            a = self.evens[row]
+            b = self.odds[column]
+        else:
+            a = self.odds[row]
+            b = self.evens[column]
+        self.board2.fill_line(a,b,player)
 
     def next_action(self):
         """Return the next action this agent wants to perform.
@@ -86,16 +111,33 @@ class DotsAndBoxesAgent:
         if len(free_lines) == 0:
             # Board full
             return None
-        (a,b) = heuristics.always4never3(self.board)
-        if a%2==0:
-            o = "h"
-            c = b
-            r = int(a/2)
-        else:
-            o = "v"
-            c = b
-            r = self.odds.index(a)
-        return r, c, o
+            # Start the timer. Once 5 seconds are over, a SIGALRM signal is sent.
+        signal.alarm(5)
+        # This try/except loop ensures that
+        #   you'll catch TimeoutException when it's sent.
+        try:
+            (a,b,score) = abv1.alphabeta(self.board2,depth = 2,player = list(self.player)[0])
+            signal.alarm(0)
+            if a%2==0:
+                x = self.odds.index(b)
+                y = self.evens.index(a)
+                return (y,x,"h")
+            else:
+                y = self.odds.index(a)
+                x = self.evens.index(b)
+                return (y,x,"v")
+        except TimeoutException:
+            (a,b) = heuristics.always4never3(self.board)
+            signal.alarm(0)
+            if a%2==0:
+                o = "h"
+                c = b
+                r = int(a/2)
+            else:
+                o = "v"
+                c = b
+                r = self.odds.index(a)
+            return r, c, o
     def end_game(self):
         self.ended = True
 
