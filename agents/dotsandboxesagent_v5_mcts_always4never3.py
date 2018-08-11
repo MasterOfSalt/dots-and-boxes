@@ -50,7 +50,8 @@ class DotsAndBoxesAgent:
         self.timelimit = timelimit
         self.ended = False
         self.board = Strings_board(nb_rows,nb_cols)
-
+        self.tree = MonteCarloSearchTree(nb_rows,nb_cols)
+        self.nodes = self.tree.tree['nodes']
         self.odds = []
         i = 0
         while i<120:
@@ -78,12 +79,17 @@ class DotsAndBoxesAgent:
             x = self.odds[row]
         self.board.fill_line(x,y)
 
+        node = self.tree.fill_line(self.nodes,str(row)+","+str(column)+","+str(orientation))
+        if node != False:
+            self.nodes = node['children']
+        
     def next_action(self):
         """Return the next action this agent wants to perform.
 
         :return: (row, column, orientation)
         """
         free_lines = self.board.get_potential_moves()
+        print(free_lines)
         if len(free_lines) == 0:
             # Board full
             return None
@@ -98,10 +104,13 @@ class DotsAndBoxesAgent:
                 o = "v"
                 c = b
                 r = self.odds.index(a)
+            print("always4never3 en line: "+str(r)+", "+str(c)+", "+str(o))
             return r, c, o
         else:
             print("MCTS tree.data MOVE")
+            print("tree best move: "+s)
             r,c,o = s.split(",")
+            
             return r,c,o
 
 
