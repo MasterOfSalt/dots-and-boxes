@@ -168,15 +168,16 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                     '''
                     os.makedirs("../data/"+folder, exist_ok=True)
                     jfile = open("../data/"+folder+"/unprocessed/"+name,'w+')
-                    json.dump(moves,jfile)
+                    #json.dump(moves,jfile)
                     movesh = []
                     movesv = []
                     for move in moves:
-                        movesv.append(transform_vertical_nxn(move,nb_cols))
-                        movesh.append(transform_horizontal_nxn(move,nb_rows))
-                    jfile2 = open("../data/"+folder+"/unprocessed/"+name+"v",'w+')
+                        realmove = move.split(',')
+                        movesv.append(transform_vertical_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_cols))
+                        movesh.append(transform_horizontal_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_rows))
+                    jfile2 = open("../data/"+folder+"/unprocessed/"+"v"+name,'w+')
                     json.dump(movesv,jfile2)
-                    jfile3 = open("../data/"+folder+"/unprocessed/"+name+"h",'w+')
+                    jfile3 = open("../data/"+folder+"/unprocessed/"+"h"+name,'w+')
                     json.dump(movesh,jfile3)
                 else:
                     msg = {
