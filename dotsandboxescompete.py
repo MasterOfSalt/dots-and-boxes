@@ -220,12 +220,12 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             await websocket2.send(json.dumps(msg))
 
     # Timings
-    for i in [1, 2]:
-        #logger.info("Timings: player={} - avg={} - min={} - max={}"\
-            .format(i,
-                    sum(timings[i])/len(timings[i]),
-                    min(timings[i]),
-                    max(timings[i])))
+    # for i in [1, 2]:
+    #     logger.info("Timings: player={} - avg={} - min={} - max={}"\
+    #         .format(i,
+    #                 sum(timings[i])/len(timings[i]),
+    #                 min(timings[i]),
+    #                 max(timings[i])))
 
     logger.info("Closed connections")
 
