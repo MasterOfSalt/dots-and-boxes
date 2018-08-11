@@ -1,4 +1,4 @@
-
 *.pyc
-*.pyc
+data/[0-9]*/unprocessed/*.json
+data/[0-9]*/processed/*.json
 *.pyc
