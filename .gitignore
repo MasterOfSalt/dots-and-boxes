@@ -2,3 +2,5 @@
 *.pyc
 *.pyc
 *.pyc
+data/*./unprocessed/*.json
+data/*./processed/*.json
