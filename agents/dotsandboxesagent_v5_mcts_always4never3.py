@@ -88,7 +88,7 @@ class DotsAndBoxesAgent:
             # Board full
             return None
         s = self.tree.get_best_move(self.nodes)
-        if s == False:
+        if not isinstance(s, str):
             (a,b) = heuristics.always4never3(self.board)
             if a%2==0:
                 o = "h"
