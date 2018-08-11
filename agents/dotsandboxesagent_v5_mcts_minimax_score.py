@@ -101,7 +101,7 @@ class DotsAndBoxesAgent:
             # Board full
             return None
         s = self.tree.get_best_move(self.nodes)
-        if s == False:
+        if not isinstance(s, str):
             (a,b,score) = abv1.alphabeta(self.board,depth = 2,player = list(self.player)[0])
 
             if a%2==0:

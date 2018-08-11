@@ -51,7 +51,7 @@ class DotsAndBoxesAgent:
         self.tree = MonteCarloSearchTree(nb_rows,nb_cols)
         self.nodes = self.tree.tree['nodes']
         self.board = Board(nb_rows,nb_cols)
-        
+
 
 
 
@@ -62,7 +62,7 @@ class DotsAndBoxesAgent:
     def register_action(self, row, column, orientation, player):
         visited_lines = []
         count_chains = self.board.count_chains()
-        
+
         """
         Register action played in game.
         :param row:
@@ -84,27 +84,29 @@ class DotsAndBoxesAgent:
 
         free_lines = self.board.free_lines()
         used_lines = self.board.used_lines()
-        
+
 
         if len(free_lines) == 0:
             # Board full
             return None
         s = self.tree.get_best_move(self.nodes)
-        if s == False:
+        if not isinstance(s, str):
             # Random move
             movei = random.randint(0, len(free_lines) - 1)
             r, c, o = free_lines[movei]
             print("RANDOM MOVE MCTS")
             return r, c, o
-        
+
         else:
             print("MCTS tree.data MOVE")
+            print(type(s))
             r,c,o = s.split(",")
+            print(r,c,o)
             return r,c,o
-        
 
 
-        
+
+
     def end_game(self):
         self.ended = True
 
@@ -125,9 +127,9 @@ async def handler(websocket, path):
                 return False
             game = msg["game"]
             answer = None
-         
 
-        
+
+
             if msg["type"] == "start":
                 # Initialize game
                 if msg["game"] in games:
