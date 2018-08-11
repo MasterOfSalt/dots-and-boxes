@@ -120,7 +120,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             # Run game
             while winner is None:
                 ask_time = time.time()
-                logger.info("Waiting for player {}".format(cur_player))
+                #logger.info("Waiting for player {}".format(cur_player))
                 if cur_player == 1:
                     msg = await websocket1.recv()
                 else:
@@ -128,7 +128,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                 recv_time = time.time()
                 diff_time = recv_time - ask_time
                 timings[cur_player].append(diff_time)
-                logger.info("Message received after (s): {}".format(diff_time))
+                #logger.info("Message received after (s): {}".format(diff_time))
                 try:
                     msg = json.loads(msg)
                 except json.decoder.JSONDecodeError as err:
@@ -221,7 +221,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
 
     # Timings
     for i in [1, 2]:
-        logger.info("Timings: player={} - avg={} - min={} - max={}"\
+        #logger.info("Timings: player={} - avg={} - min={} - max={}"\
             .format(i,
                     sum(timings[i])/len(timings[i]),
                     min(timings[i]),
@@ -231,7 +231,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
 
 
 def user_action(r, c, o, cur_player, cells, points, nb_rows, nb_cols):
-    logger.info("User action: player={} - r={} - c={} - o={}".format(cur_player, r, c, o))
+    #logger.info("User action: player={} - r={} - c={} - o={}".format(cur_player, r, c, o))
     next_player = cur_player
     won_cell = False
     cell = cells[int(r)][int(c)]
