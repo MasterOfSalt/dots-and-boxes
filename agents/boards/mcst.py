@@ -67,7 +67,7 @@ class MonteCarloSearchTree:
     def get_best_move(self,nodes):
         winrate = -1
         next_move = False
-        
+
         for node in nodes:
             print (node['plays'])
             if 'parentPlays' in node:
@@ -83,8 +83,8 @@ class MonteCarloSearchTree:
             else:
                 if (node['wins']/node['plays']) > winrate:
                     next_move = node['move']
-                return next_move    
-            
+                return next_move
+
     """ x = node['wins']/node['plays'] + sqrt(2*log(node['plays']/[node['plays']]))"""
 
     def fill_line(self,nodes,move):
@@ -137,7 +137,7 @@ class MonteCarloSearchTree:
         if(winner == 2 and (len(combo) + 1)%2 != 0):
             nodes.append({
                     'wins': 0,
-                    'plays': 99,
+                    'plays': 1,
                     'move': last,
                     'children':[]
                 })
@@ -233,6 +233,21 @@ class MonteCarloSearchTree:
 
         with open(self.dimensions+'/tree.data', 'w') as outfile:
             json.dump(self.tree, outfile)
+    def addToChildren(self,nodes,value):
+        for node in nodes:
+            node['parentPlays'] = value
+            plays = node['plays']
+            if node['children'] != []:
+                self.addToChildren(node['children'],plays)
+
+    def parentPlays(self):
+        for node in self.tree['nodes']:
+            plays = node['plays']
+            if node['children'] != []:
+                self.addToChildren(node['children'],plays)
+        with open(self.dimensions+'/tree.data', 'w') as outfile:
+            json.dump(self.tree, outfile)
+
 
 
 # add_game(['1,2,h','1,1,v','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h','1,3,h'],1)
