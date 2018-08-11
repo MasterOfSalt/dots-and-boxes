@@ -102,7 +102,6 @@ class DotsAndBoxesAgent:
             # Board full
             return None
         (a,b,score) = abv1.alphabeta(self.board,depth = 2,player = list(self.player)[0])
-
         if a%2==0:
             x = self.odds.index(b)
             y = self.evens.index(a)

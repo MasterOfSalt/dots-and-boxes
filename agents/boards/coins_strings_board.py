@@ -99,3 +99,6 @@ class Coins_strings_board:
         csb.available_moves = self.available_moves[:]
         csb.boxes = self.boxes[:]
         return csb
+    def __eq__(self, other):
+        """Override the default Equals behavior"""
+        return self.board == other.board

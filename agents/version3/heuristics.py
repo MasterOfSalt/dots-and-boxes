@@ -1,5 +1,4 @@
 from random import randint
-
 def completeBox(board):
     """method description
     :param x: _explanation
@@ -13,7 +12,6 @@ def completeBox(board):
                 yc = [j,j,j+1,j]
                 return (xc[ind],yc[ind])
     return(False)
-
 def always4never3(board):
     """method description
     :param x: _explanation
