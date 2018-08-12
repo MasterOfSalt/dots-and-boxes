@@ -184,7 +184,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                     '''
                     os.makedirs("../data/"+folder, exist_ok=True)
                     jfile = open("../data/"+folder+"/unprocessed/"+name,'w+')
-                    #json.dump(moves,jfile)
+                    json.dump(moves,jfile)
                     movesh = []
                     movesv = []
                     nxn = (nb_rows == nb_cols)

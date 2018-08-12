@@ -73,7 +73,7 @@ class MonteCarloSearchTree:
                     value = (node["wins"]/node["plays"]) + sqrt(2)*sqrt(log(node["parentPlays"])/node["plays"])
                 except:
                     print("something went wrong")
-                    value = node["wins"]/node["plays"])
+                    value = node["wins"]/node["plays"]
                 next_move = node["move"]
                 if int(value) > int(rate):
                     rate = int(value)
