@@ -37,13 +37,22 @@ if [ "$parser" == "P" ]; then
 	echo "Started parsing..."
     python3 ../agents/parser.py
     echo "done parsing"
-    if [ "$learner" == "L" ]; then
+    
+else
+    echo "Data not parsed"
+fi
+
+if [ "$learner" == "L" ]; then
         echo "Started learning..."
         python3 ../agents/learner.py $R $C
         echo "done learning"
     else
         echo "data not learned"
+<<<<<<< HEAD
+    fi
+=======
     fi
 else
     echo "Data not parsed"
 fi
+>>>>>>> c4df73ad40e95d4b7f735e5d321e9336d06a20d2
