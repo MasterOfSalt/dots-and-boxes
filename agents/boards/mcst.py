@@ -64,18 +64,29 @@ class MonteCarloSearchTree:
                     'children':[]
                 })
             nodes = nodes[0]['children']
+    def get_best_move_for_set(self,nodelist):
+        nodes = self.tree['nodes']
+        while(len(nodelist)>0):
+            move = nodelist.pop(0)
+            for node in nodes:
+                if node['move'] == move:
+                    nodes = node["children"]
+                    self.get_best_move_for_set(nodelist)
+                    break
+        return self.get_best_move(nodes)
+
     def get_best_move(self,nodes):
-        rate = 0
+        rate = -1
         next_move = False
         for node in nodes:
                 try:
                     value = (node["wins"]/node["plays"]) + sqrt(2)*sqrt(log(node["parentPlays"])/node["plays"])
                 except:
-                    value = 0
+                    value = node["wins"]/node["plays"]
                 if int(value) > int(rate):
                     rate = int(value)
                     next_move = node["move"]
-        return next_move
+        return (next_move,rate)
 
         #return (node["wins"]/node["plays"]) + (sqrt(2))
             # if 'parentPlays' in node:

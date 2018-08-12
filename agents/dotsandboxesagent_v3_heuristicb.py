@@ -28,7 +28,7 @@ def completeBox(board):
                 return (xc[ind],yc[ind])
     raise TimeoutException
 
-def always4never3(board):
+def heuristic(board):
     """method description
     :param x: _explanation
     """
@@ -157,7 +157,7 @@ class DotsAndBoxesAgent:
         #   you'll catch TimeoutException when it's sent.
 
         if(self.numberofmovesdone/self.maxnumberofmoves*100 < 60):
-                (a,b) = heuristics.always4never3(self.board)
+                (a,b) = heuristics.heuristic(self.board)
                 signal.alarm(0)
                 if a%2==0:
                     o = "h"
@@ -183,7 +183,7 @@ class DotsAndBoxesAgent:
                 return (y,x,"v")
         except TimeoutException:
             self.depth -= 1
-            (a,b) = heuristics.always4never3(self.board)
+            (a,b) = heuristics.heuristic(self.board)
             signal.alarm(0)
             if a%2==0:
                 o = "h"
