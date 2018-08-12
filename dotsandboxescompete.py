@@ -23,7 +23,19 @@ import csv
 import uuid
 logger = logging.getLogger(__name__)
 import os
+def transform_horizontal_nxn(coord,n):
+    x,y,o = coord
+    if o == "h":
+        return abs(n-x),y,o
+    if o == "v":
+        return abs(n-x-1),y,o
 
+def transform_vertical_nxn(coord,n):
+    x,y,o = coord
+    if o == "h":
+        return x,abs(n-y-1),o
+    if o == "v":
+        return x,abs(n-y),o
 def start_competition(address1, address2, nb_rows, nb_cols, timelimit):
    asyncio.get_event_loop().run_until_complete(connect_agent(address1, address2, nb_rows, nb_cols, timelimit))
 
@@ -59,7 +71,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             msg["player"] = 2
             await websocket2.send(json.dumps(msg))
             moves = []
-            
+
             player1 = "player1"
             player2 = "player2"
             if uri1 == "ws://localhost:2001" or uri1 == "ws://127.0.0.1:2001":
@@ -82,7 +94,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                 player2 = "V5_MCTS_minimax_score"
             if uri2 == "ws://localhost:20051" or uri2 == "ws://127.0.0.1:20051":
                 p2 = "v5"
-                player2 = "V5_MCTS_random"    
+                player2 = "V5_MCTS_random"
             if uri2 == "ws://localhost:2001" or uri2 == "ws://127.0.0.1:2001":
                 p2 = "v1"
                 player2 = "V1_RANDOM"
@@ -104,11 +116,11 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             if uri2 == "ws://localhost:20052" or uri2 == "ws://127.0.0.1:20052":
                 p2 = "v5"
                 player2 = "V5_MCTS_random"
-                
+
             # Run game
             while winner is None:
                 ask_time = time.time()
-                logger.info("Waiting for player {}".format(cur_player))
+                #logger.info("Waiting for player {}".format(cur_player))
                 if cur_player == 1:
                     msg = await websocket1.recv()
                 else:
@@ -116,7 +128,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                 recv_time = time.time()
                 diff_time = recv_time - ask_time
                 timings[cur_player].append(diff_time)
-                logger.info("Message received after (s): {}".format(diff_time))
+                #logger.info("Message received after (s): {}".format(diff_time))
                 try:
                     msg = json.loads(msg)
                 except json.decoder.JSONDecodeError as err:
@@ -132,7 +144,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                                           cells, points,
                                           nb_rows, nb_cols)
 
-                    
+
                 if points[1] + points[2] == nb_cols * nb_rows:
                     # Game over
                     winner = 1
@@ -143,7 +155,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                         winner = 0
                     if points[2] > points[1]:
                         winner = 2
-                        
+
                     folder = str(nb_rows) + "x" + str(nb_cols)
                     name = "game-"+str(nb_rows)+"-"+str(nb_cols)+"-"+str(id)+"-"+str(p1)+"-"+str(p2)+"_"+str(winner)+".json"
                     '''
@@ -156,8 +168,17 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                     '''
                     os.makedirs("../data/"+folder, exist_ok=True)
                     jfile = open("../data/"+folder+"/unprocessed/"+name,'w+')
-                    json.dump(moves,jfile)
-
+                    #json.dump(moves,jfile)
+                    movesh = []
+                    movesv = []
+                    for move in moves:
+                        realmove = move.split(',')
+                        movesv.append(transform_vertical_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_cols))
+                        movesh.append(transform_horizontal_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_rows))
+                    jfile2 = open("../data/"+folder+"/unprocessed/"+"v"+name,'w+')
+                    json.dump(movesv,jfile2)
+                    jfile3 = open("../data/"+folder+"/unprocessed/"+"h"+name,'w+')
+                    json.dump(movesh,jfile3)
                 else:
                     msg = {
                         "type": "action",
@@ -187,7 +208,7 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             }
             f = open('../data/data.csv', 'a')
             writer = csv.writer(f)
-            
+
             if winner == 1:
                 winnerstring = player1
             else:
@@ -199,18 +220,18 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
             await websocket2.send(json.dumps(msg))
 
     # Timings
-    for i in [1, 2]:
-        logger.info("Timings: player={} - avg={} - min={} - max={}"\
-            .format(i,
-                    sum(timings[i])/len(timings[i]),
-                    min(timings[i]),
-                    max(timings[i])))
+    # for i in [1, 2]:
+    #     logger.info("Timings: player={} - avg={} - min={} - max={}"\
+    #         .format(i,
+    #                 sum(timings[i])/len(timings[i]),
+    #                 min(timings[i]),
+    #                 max(timings[i])))
 
     logger.info("Closed connections")
 
 
 def user_action(r, c, o, cur_player, cells, points, nb_rows, nb_cols):
-    logger.info("User action: player={} - r={} - c={} - o={}".format(cur_player, r, c, o))
+    #logger.info("User action: player={} - r={} - c={} - o={}".format(cur_player, r, c, o))
     next_player = cur_player
     won_cell = False
     cell = cells[int(r)][int(c)]
@@ -264,7 +285,7 @@ def user_action(r, c, o, cur_player, cells, points, nb_rows, nb_cols):
         next_player = 3 - cur_player
     else:
         next_player = cur_player
-        print("Update points: player1={} - player2={}".format(points[1], points[2]))
+        #print("Update points: player1={} - player2={}".format(points[1], points[2]))
     return next_player
 
 

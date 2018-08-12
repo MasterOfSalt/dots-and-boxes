@@ -12,6 +12,44 @@ class TimeoutException(Exception):   # Custom exception class
 def timeout_handler(signum, frame):   # Custom signal handler
     raise TimeoutException
 
+from random import randint
+
+def completeBox(board):
+    """method description
+    :param x: _explanation
+    """
+    for i in range(board.nb_rows):
+        for j in range(board.nb_rows):
+            sq_edges = board.get_edges((i,j))
+            if sum(sq_edges) == 3:
+                ind = sq_edges.index(0)
+                xc = [i*2,i*2+1,i*2+1,i*2+2]
+                yc = [j,j,j+1,j]
+                return (xc[ind],yc[ind])
+    raise TimeoutException
+
+def always4never3(board):
+    """method description
+    :param x: _explanation
+    """
+    move = completeBox(board)
+    if move:
+        return(move)
+    potential_moves = []
+    potential_moves_not3 = []
+    for i, row in enumerate(board.board):
+        for j, val in enumerate(row):
+            if val == False:
+                potential_moves.append((i,j))
+                tmp = board.check_surrounding_squares((i,j),2)
+                if not tmp: potential_moves_not3.append((i,j))
+    if not potential_moves:
+        return(False)
+    else:
+        if potential_moves_not3:
+            return(potential_moves_not3[randint(0,len(potential_moves_not3)-1)])
+        else:
+            return(potential_moves[randint(0,len(potential_moves)-1)])
 # Change the behavior of SIGALRM
 signal.signal(signal.SIGALRM, timeout_handler)
 """
@@ -61,10 +99,12 @@ class DotsAndBoxesAgent:
         self.timelimit = timelimit
         self.ended = False
         self.board = Strings_board(nb_rows,nb_cols)
-
+        self.depth = 5
         self.board2 = Coins_strings_board(nb_rows+1,nb_cols+1)
         self.odds = []
         self.evens = []
+        self.maxnumberofmoves = len(self.board.get_potential_moves())
+        self.numberofmovesdone = 0
 
         i = 0
         while i<120:
@@ -101,7 +141,7 @@ class DotsAndBoxesAgent:
             a = self.odds[row]
             b = self.evens[column]
         self.board2.fill_line(a,b,player)
-
+        self.numberofmovesdone += 1
     def next_action(self):
         """Return the next action this agent wants to perform.
 
@@ -112,12 +152,27 @@ class DotsAndBoxesAgent:
             # Board full
             return None
             # Start the timer. Once 5 seconds are over, a SIGALRM signal is sent.
-        signal.alarm(5)
+
         # This try/except loop ensures that
         #   you'll catch TimeoutException when it's sent.
+
+        if(self.numberofmovesdone/self.maxnumberofmoves*100 < 60):
+                (a,b) = heuristics.always4never3(self.board)
+                signal.alarm(0)
+                if a%2==0:
+                    o = "h"
+                    c = b
+                    r = int(a/2)
+                else:
+                    o = "v"
+                    c = b
+                    r = self.odds.index(a)
+                return r, c, o
+        signal.alarm(5)
         try:
-            (a,b,score) = abv1.alphabeta(self.board2,depth = 2,player = list(self.player)[0])
+            (a,b,score) = abv1.alphabeta(self.board2,10,player = list(self.player)[0])
             signal.alarm(0)
+            self.depth += 1
             if a%2==0:
                 x = self.odds.index(b)
                 y = self.evens.index(a)
@@ -127,6 +182,7 @@ class DotsAndBoxesAgent:
                 x = self.evens.index(b)
                 return (y,x,"v")
         except TimeoutException:
+            self.depth -= 1
             (a,b) = heuristics.always4never3(self.board)
             signal.alarm(0)
             if a%2==0:
@@ -138,6 +194,7 @@ class DotsAndBoxesAgent:
                 c = b
                 r = self.odds.index(a)
             return r, c, o
+
     def end_game(self):
         self.ended = True
 

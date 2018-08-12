@@ -157,7 +157,7 @@ class MonteCarloSearchTree:
         for steak_cheese in subs:
             if len(steak_cheese) > 1:
                 last = steak_cheese.pop()
-                combos = list(it.combinations(steak_cheese, len(steak_cheese)))
+                combos = list(it.permutations(steak_cheese, len(steak_cheese)))
                 for combo in combos:
                     self.add_sequence_to_tree(last,list(combo),winner)
 

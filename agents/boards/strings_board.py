@@ -135,7 +135,7 @@ class Strings_board:
                 if sum(sq_edges)>= k:
                     num += 1
 
-            if j < self.nb_cols - 1:
+            if j < self.nb_cols:
                 # check right
                 sq_edges = self.get_edges(((i-1)/2, j))
                 if sum(sq_edges)>= k:

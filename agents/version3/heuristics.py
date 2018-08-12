@@ -1,14 +1,10 @@
 from random import randint
-
-def get_first_completing_move(board):
+def completeBox(board):
     """method description
     :param x: _explanation
     """
-    # returns completing move, if exists
-    # otherwise returns False
-    #adding some text
-    for i in range(board.nb_rows-1):
-        for j in range(board.nb_rows-1):
+    for i in range(board.nb_rows):
+        for j in range(board.nb_rows):
             sq_edges = board.get_edges((i,j))
             if sum(sq_edges) == 3:
                 ind = sq_edges.index(0)
@@ -16,12 +12,11 @@ def get_first_completing_move(board):
                 yc = [j,j,j+1,j]
                 return (xc[ind],yc[ind])
     return(False)
-
 def always4never3(board):
     """method description
     :param x: _explanation
     """
-    move = get_first_completing_move(board)
+    move = completeBox(board)
     if move:
         return(move)
     potential_moves = []
