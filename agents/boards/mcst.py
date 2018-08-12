@@ -69,13 +69,10 @@ class MonteCarloSearchTree:
         next_move = False
 
         for node in nodes:
-            print (node['plays'])
             if 'parentPlays' in node:
                 if node['plays'] is not 0:
-                    print (node['parentPlays'])
-                    print("YES")
                     if (isinstance(cmath.sqrt(2*log(node['parentPlays']/node['plays'])), complex)):
-                        print("kak")
+                        print("Parent plays: "+node['parentPlays']+" mcts calc: "+cmath.sqrt(2*log(node['parentPlays']/node['plays'])))
                     else:
                         if (node['wins']/node['plays'] + cmath.sqrt(2*log(node['parentPlays']/node['plays']))) > winrate:
                             next_move = node['move']
