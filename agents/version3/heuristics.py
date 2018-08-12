@@ -9,7 +9,7 @@ def completeBox(board):
             if sum(number_of_borders) == 3:
                 return ([row*2,row*2+1,row*2+1,row*2+2][number_of_borders.index(0)],[col,col,col+1,col][number_of_borders.index(0)])
     return(False)
-def always4never3(board):
+def find_good_move(board):
     """method description
     :param x: _explanation
     """

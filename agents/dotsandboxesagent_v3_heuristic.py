@@ -49,7 +49,7 @@ class DotsAndBoxesAgent:
         self.timelimit = timelimit
         self.ended = False
         self.board = Strings_board(nb_rows,nb_cols)
-        
+
         self.odds = []
         i = 0
         while i<120:
@@ -86,7 +86,7 @@ class DotsAndBoxesAgent:
         if len(free_lines) == 0:
             # Board full
             return None
-        (a,b) = heuristics.always4never3(self.board)
+        (a,b) = heuristics.find_good_move(self.board)
         if a%2==0:
             o = "h"
             c = b
