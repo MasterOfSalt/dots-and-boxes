@@ -38,6 +38,17 @@ def transform_vertical_nxn(coord,n):
         return x,abs(n-y-1),o
     if o == "v":
         return x,abs(n-y),o
+def transform_90_nxn(coord,n):
+    x,y,o = coord
+    if o == "h":
+        return y,abs(n-x),"v"
+    if o == "v":
+        return y,abs(n-x-1),"h"
+#
+def transform_180_nxn(coord,n):
+    return transform_90_nxn(transform_90_nxn(coord,n),n)
+def transform_270_nxn(coord,n):
+    return transform_90_nxn(transform_180_nxn(coord,n),n)
 def start_competition(address1, address2, nb_rows, nb_cols, timelimit):
    asyncio.get_event_loop().run_until_complete(connect_agent(address1, address2, nb_rows, nb_cols, timelimit))
 
@@ -104,6 +115,9 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                 p2 = "v2"
                 player2 = "V2_ALPHABETA"
             if uri2 == "ws://localhost:2003" or uri2 == "ws://127.0.0.1:2003":
+                p2 = "v3"
+                player2 = "V3_HEURISTIC"
+            if uri2 == "ws://localhost:3003" or uri2 == "ws://127.0.0.1:3003":
                 p2 = "v3"
                 player2 = "V3_HEURISTIC"
             if uri2 == "ws://localhost:20031" or uri2 == "ws://127.0.0.1:20031":
@@ -173,14 +187,30 @@ async def connect_agent(uri1, uri2, nb_rows, nb_cols, timelimit):
                     #json.dump(moves,jfile)
                     movesh = []
                     movesv = []
+                    nxn = (nb_rows == nb_cols)
+                    moves90 = []
+                    moves180 = []
+                    moves270 = []
                     for move in moves:
                         realmove = move.split(',')
                         movesv.append(transform_vertical_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_cols))
                         movesh.append(transform_horizontal_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_rows))
+                        if nxn:
+                            moves90.append(transform_90_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_rows))
+                            moves180.append(transform_180_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_rows))
+                            moves270.append(transform_270_nxn((int(realmove[0]),int(realmove[1]),str(realmove[2])),nb_rows))
                     jfile2 = open("../data/"+folder+"/unprocessed/"+"v"+name,'w+')
                     json.dump(movesv,jfile2)
                     jfile3 = open("../data/"+folder+"/unprocessed/"+"h"+name,'w+')
                     json.dump(movesh,jfile3)
+                    if nxn:
+                        jfile4 = open("../data/"+folder+"/unprocessed/"+"90"+name,'w+')
+                        json.dump(moves90,jfile4)
+                        jfile5 = open("../data/"+folder+"/unprocessed/"+"180"+name,'w+')
+                        json.dump(moves180,jfile5)
+                        jfile6 = open("../data/"+folder+"/unprocessed/"+"270"+name,'w+')
+                        json.dump(moves270,jfile6)
+
                 else:
                     msg = {
                         "type": "action",

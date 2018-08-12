@@ -166,7 +166,7 @@ class MonteCarloSearchTree:
 
 
     def add_game(self,nodelist,winner):
-        self.add_all_sequences(nodelist,winner)
+        #self.add_all_sequences(nodelist,winner)
         go = True
         if(winner == 1):
             win = True
@@ -226,9 +226,9 @@ class MonteCarloSearchTree:
                     self.add_game(basicList,winner)
                 os.rename(name, self.dimensions + "/processed/"+base)
 
-            except IOError as exc:
-                if exc.errno != errno.EISDIR:
-                    raise
+            except:
+                print("mislukt")
+                continue
 
         with open(self.dimensions+'/tree.data', 'w') as outfile:
             json.dump(self.tree, outfile)
