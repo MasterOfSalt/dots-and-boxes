@@ -69,20 +69,17 @@ class MonteCarloSearchTree:
         next_move = False
         for node in nodes:
                 nbofsimsaftermove = self.find_plays_for_node(node)
-                value = (node["wins"]/node["plays"]) + sqrt(2)*sqrt(log(node["parentPlays"])/node["plays"])
+                try:
+                    value = (node["wins"]/node["plays"]) + sqrt(2)*sqrt(log(node["parentPlays"])/node["plays"])
+                except:
+                    print("something went wrong")
+                    value = node["wins"]/node["plays"])
                 next_move = node["move"]
                 if int(value) > int(rate):
                     rate = int(value)
                     next_move = node["move"]
         return next_move
-    def find_plays_for_node(self,node):
-        plays = 0
-        for child in node["children"]:
-            if child["children"] == []:
-                plays = plays + child["plays"]
-            else:
-                plays = plays + child["plays"] + self.find_plays_for_node(child)
-        return plays
+
         #return (node["wins"]/node["plays"]) + (sqrt(2))
             # if 'parentPlays' in node:
             #     if node['plays'] is not 0:
