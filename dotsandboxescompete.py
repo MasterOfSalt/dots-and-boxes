@@ -21,6 +21,8 @@ import uuid
 import time
 import csv
 import uuid
+from timeit import Timer
+
 logger = logging.getLogger(__name__)
 import os
 def transform_horizontal_nxn(coord,n):
