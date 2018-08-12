@@ -2,24 +2,24 @@
 import itertools as it
 
 # print("stel, ge gaat een move (2,2,v) toegen na de volgende sequence")
-moves = ['1,2,h','1,1,v','1,3,h']
-# print(moves)
-# for l in it.permutations(moves, len(moves)):
-#     print(l,"2,2,v")
-
-subs = [[]]
-for i in range(len(moves)):
-    n = i+1
-    while n <= len(moves):
-        sub = moves[i:n]
-        subs.append(sub)
-        n += 1
-for steak_cheese in subs:
-    if len(steak_cheese) > 1:
-        last = steak_cheese.pop()
-        combos = list(it.permutations(steak_cheese, len(steak_cheese)))
-        for combo in combos:
-            print(combo,last)
+# moves = ['1,2,h','1,1,v','1,3,h']
+# # print(moves)
+# # for l in it.permutations(moves, len(moves)):
+# #     print(l,"2,2,v")
+#
+# subs = [[]]
+# for i in range(len(moves)):
+#     n = i+1
+#     while n <= len(moves):
+#         sub = moves[i:n]
+#         subs.append(sub)
+#         n += 1
+# for steak_cheese in subs:
+#     if len(steak_cheese) > 1:
+#         last = steak_cheese.pop()
+#         combos = list(it.permutations(steak_cheese, len(steak_cheese)))
+#         for combo in combos:
+#             print(combo,last)
 
 # def transform_horizontal_nxn(coord,n):
 #     x,y,o = coord
@@ -35,17 +35,23 @@ for steak_cheese in subs:
 #     if o == "v":
 #         return x,abs(n-y),o
 #
-# def transform_90_nxn(coord,n):
-#     x,y,o = coord
-#     if o == "h":
-#         return y,abs(n-x),"v"
-#     if o == "v":
-#         return y,abs(n-x-1),"h"
+def transform_90_nxn(coord,n):
+    x,y,o = coord
+    if o == "h":
+        return y,abs(n-x),"v"
+    if o == "v":
+        return y,abs(n-x-1),"h"
 #
-# def transform_180_nxn(coord,n):
-#     return transform_90_nxn(transform_90_nxn(coord,n),n)
-# def transform_270_nxn(coord,n):
-#     return transform_90_nxn(transform_180_nxn(coord,n),n)
+def transform_180_nxn(coord,n):
+    return transform_90_nxn(transform_90_nxn(coord,n),n)
+def transform_270_nxn(coord,n):
+    return transform_90_nxn(transform_180_nxn(coord,n),n)
+
+print(transform_90_nxn((1,1,"h"),6))
+print(transform_180_nxn((1,1,"h"),6))
+print(transform_270_nxn((1,1,"h"),6))
+
+
 #
 # print(transform_vertical_nxn((0,0,"v"),5))
 # print(transform_vertical_nxn((0,5,"v"),5))
@@ -105,16 +111,3 @@ for steak_cheese in subs:
 #
 #
 #
-# # print(transform_90((0,2,"h"),6))
-# #
-# # print(transform_90((1,0,"h"),6))
-# # print(transform_90((1,1,"h"),6))
-# # print(transform_90((1,2,"h"),6))
-# #
-# # print(transform_90((0,0,"v"),6))
-# # print(transform_90((1,0,"v"),6))
-# # print(transform_90((2,0,"v"),6))
-# #
-# # print(transform_90((0,1,"v"),6))
-# # print(transform_90((1,1,"v"),6))
-# # print(transform_90((2,1,"v"),6))
