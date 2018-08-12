@@ -194,6 +194,8 @@ class Board:
         
     def count_chains(self):
         t = Timer(lambda: self.is_chain())
+        print("")
+        print ("Timeit chaincounter: ")
         print (t.timeit(number=1))
         global chain_count
         self.is_chain()
