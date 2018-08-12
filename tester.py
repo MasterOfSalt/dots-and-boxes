@@ -1,11 +1,11 @@
 
 import itertools as it
 
-# print("stel, ge gaat een move (2,2,v) toegen na de volgende sequence")
-# moves = ['1,2,h','1,1,v','1,3,h']
-# # print(moves)
-# # for l in it.permutations(moves, len(moves)):
-# #     print(l,"2,2,v")
+print("stel, ge gaat een move (2,2,v) toegen na de volgende sequence")
+moves = ['1,2,h','1,1,v','1,3,h']
+# print(moves)
+# for l in it.permutations(moves, len(moves)):
+#     print(l,"2,2,v")
 #
 # subs = [[]]
 # for i in range(len(moves)):

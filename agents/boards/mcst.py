@@ -69,7 +69,7 @@ class MonteCarloSearchTree:
         next_move = False
         for node in nodes:
                 nbofsimsaftermove = self.find_plays_for_node(node)
-                value = (node["wins"]/node["plays"]) + sqrt(2)*sqrt(log(nbofsimsaftermove)/node["plays"])
+                value = (node["wins"]/node["plays"]) + sqrt(2)*sqrt(log(node["parentPlays"])/node["plays"])
                 next_move = node["move"]
                 if int(value) > int(rate):
                     rate = int(value)
@@ -248,18 +248,26 @@ class MonteCarloSearchTree:
 
         with open(self.dimensions+'/tree.data', 'w') as outfile:
             json.dump(self.tree, outfile)
-    def addToChildren(self,nodes,value):
-        for node in nodes:
-            node['parentPlays'] = value
-            plays = node['plays']
-            if node['children'] != []:
-                self.addToChildren(node['children'],plays)
+    def parentPlays2(self,node):
+        plays = 0
+        for n in node:
+            plays += n["plays"]
+        for n in node:
+            n["parentPlays"] = plays
+            if n["children"] == []:
+                break
+            self.parentPlays2(n["children"])
 
     def parentPlays(self):
-        for node in self.tree['nodes']:
-            plays = node['plays']
-            if node['children'] != []:
-                self.addToChildren(node['children'],plays)
+        plays = 0
+        for node in self.tree["nodes"]:
+            plays += node["plays"]
+        for node in self.tree["nodes"]:
+            node["parentPlays"] = plays
+            if node["children"] == []:
+                break
+            self.parentPlays2(node["children"])
+
         with open(self.dimensions+'/tree.data', 'w') as outfile:
             json.dump(self.tree, outfile)
 
