@@ -3,34 +3,32 @@ def completeBox(board):
     """method description
     :param x: _explanation
     """
-    for i in range(board.nb_rows):
-        for j in range(board.nb_rows):
-            sq_edges = board.get_edges((i,j))
-            if sum(sq_edges) == 3:
-                ind = sq_edges.index(0)
-                xc = [i*2,i*2+1,i*2+1,i*2+2]
-                yc = [j,j,j+1,j]
-                return (xc[ind],yc[ind])
+    for row in range(board.nb_rows):
+        for col in range(board.nb_cols):
+            number_of_borders = board.number_of_borders((row,col))
+            if sum(number_of_borders) == 3:
+                return ([row*2,row*2+1,row*2+1,row*2+2][number_of_borders.index(0)],[col,col,col+1,col][number_of_borders.index(0)])
     return(False)
 def always4never3(board):
     """method description
     :param x: _explanation
     """
     move = completeBox(board)
+    moves = []
+    primary_moves = []
     if move:
         return(move)
-    potential_moves = []
-    potential_moves_not3 = []
     for i, row in enumerate(board.board):
         for j, val in enumerate(row):
-            if val == False:
-                potential_moves.append((i,j))
-                tmp = board.check_surrounding_squares((i,j),2)
-                if not tmp: potential_moves_not3.append((i,j))
-    if not potential_moves:
+            newmove = (i,j)
+            if not val:
+                moves.append((i,j))
+                if not board.find_boxes(newmove):
+                    primary_moves.append(newmove)
+    if not moves:
         return(False)
     else:
-        if potential_moves_not3:
-            return(potential_moves_not3[randint(0,len(potential_moves_not3)-1)])
+        if primary_moves:
+            return(primary_moves[randint(0,len(primary_moves)-1)])
         else:
-            return(potential_moves[randint(0,len(potential_moves)-1)])
+            return(moves[randint(0,len(moves)-1)])

@@ -65,24 +65,40 @@ class MonteCarloSearchTree:
                 })
             nodes = nodes[0]['children']
     def get_best_move(self,nodes):
-        winrate = -1
+        rate = 0
         next_move = False
-
         for node in nodes:
-            if 'parentPlays' in node:
-                if node['plays'] is not 0:
-                    if (isinstance(cmath.sqrt(2*log(node['parentPlays']/node['plays'])), complex)):
-                        print("Parent plays: "+str(node['parentPlays'])+" mcts calc: "+str(cmath.sqrt(2*log(node['parentPlays']/node['plays']))))
-                    else:
-                        if (node['wins']/node['plays'] + cmath.sqrt(2*log(node['parentPlays']/node['plays']))) > winrate:
-                            next_move = node['move']
-                            print(str(node['wins']/node['plays'] + cmath.sqrt(2*log(node['parentPlays']/node['plays']))))
-                        return next_move
+                nbofsimsaftermove = self.find_plays_for_node(node)
+                value = (node["wins"]/node["plays"]) + sqrt(2)*sqrt(log(nbofsimsaftermove)/node["plays"])
+                next_move = node["move"]
+                if int(value) > int(rate):
+                    rate = int(value)
+                    next_move = node["move"]
+        return next_move
+    def find_plays_for_node(self,node):
+        plays = 0
+        for child in node["children"]:
+            if child["children"] == []:
+                plays = plays + child["plays"]
             else:
-                if (node['wins']/node['plays']) + cmath.sqrt(2*log(node['parentPlays']/node['plays'])) > winrate:
-                    next_move = node['move']
-                    print("hier")
-                return next_move
+                plays = plays + child["plays"] + self.find_plays_for_node(child)
+        return plays
+        #return (node["wins"]/node["plays"]) + (sqrt(2))
+            # if 'parentPlays' in node:
+            #     if node['plays'] is not 0:
+            #         if (isinstance(cmath.sqrt(2*log(node['parentPlays']/node['plays'])), complex)):
+            #             print("Parent plays: "+str(node['parentPlays'])+" mcts calc: "+str(cmath.sqrt(2*log(node['parentPlays']/node['plays']))))
+            #         else:
+            #             if (node['wins']/node['plays'] + cmath.sqrt(2*log(node['parentPlays']/node['plays']))) > winrate:
+            #                 next_move = node['move']
+            #                 print(str(node['wins']/node['plays'] + cmath.sqrt(2*log(node['parentPlays']/node['plays']))))
+            #             return next_move
+            # else:
+            #     if (node['wins']/node['plays']) + cmath.sqrt(2*log(node['parentPlays']/node['plays'])) > winrate:
+            #         next_move = node['move']
+            #         print("hier")
+
+        #return next_move
 
     """ x = node['wins']/node['plays'] + sqrt(2*log(node['plays']/[node['plays']]))"""
 

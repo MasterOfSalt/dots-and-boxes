@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-from boards.coins_strings_board_numeric import Coins_strings_board
-import version2.alpha_beta_v2_chains as chains
+from boards.coins_strings_board import Coins_strings_board
+import version2.alpha_beta_v1_score as abv1
+
+
 """
 dotsandboxesagent.py
 
@@ -18,7 +20,7 @@ import websockets
 import json
 from collections import defaultdict
 import random
-import numpy as np
+
 
 logger = logging.getLogger(__name__)
 games = {}
@@ -44,74 +46,82 @@ class DotsAndBoxesAgent:
         :param nb_rows: Rows in grid
         :param nb_cols: Columns in grid
         :param timelimit: Maximum time allowed to send a next action.
+        :param odds, evens: used to convert to and from string-and-point boards
         """
         self.player = {player}
         self.timelimit = timelimit
         self.ended = False
-        self.board = Coins_strings_board(nb_rows,nb_cols)
-        print(self.board.free_lines())
+        self.board = Coins_strings_board(nb_rows+1,nb_cols+1)
         self.odds = []
         self.evens = []
+
         i = 0
         while i<120:
-            if(i%2!=0):
-                self.odds.append(i)
-            else:
+            if(i%2==0):
                 self.evens.append(i)
+            else:
+                self.odds.append(i)
             i += 1
+
 
     def add_player(self, player):
         """Use the same agent for multiple players."""
         self.player.add(player)
 
-    def register_action(self, row, column, orientation, player):
+    def register_action(self, y, x, orientation, player):
         """
-        Register action played in game.
+        INPUT
+        Register action played in game after conversion to string board
         :param row:
         :param columns:
         :param orientation: "v" or "h"
         :param player: 1 or 2
         """
-        if(orientation == "h"):
-            a = self.evens[row]
-            b = self.odds[column]
+        """
+        OUTPUT
+        :param: number
+        :param: number
+        """
+        if (orientation == "h"):
+            a = self.evens[y]
+            b = self.odds[x]
         else:
-            a = self.odds[row]
-            b = self.evens[column]
-        self.board.fill_line(player,a,b)
-
+            a = self.odds[y]
+            b = self.evens[x]
+        self.board.fill_line(a,b,player)
     def next_action(self):
         """Return the next action this agent wants to perform.
-
-        :return: (row, column, orientation)
+        :return: (row, col, orientation) [EQUIVALENT]
+        :return: (y, x, orientation) [EQUIVALENT]
         """
+        # logger.info("Computing next move (grid={}x{}, player={})"\
+        #         .format(self.board.nb_rows, self.board.nb_cols, self.player))
+
         free_lines = self.board.free_lines()
         if len(free_lines) == 0:
             # Board full
             return None
-        (a,b) = free_lines[0]
-        print("longest chain:",chains.find_longest_chain(self.board))
-        a = np.asscalar(np.int16(a))
-        b = np.asscalar(np.int16(b))
+        (a,b,score) = abv1.alphabeta(self.board,depth = 2,player = list(self.player)[0])
         if a%2==0:
-            o = "h"
-            c = self.odds.index(b)
-            r = self.evens.index(a)
+            x = self.odds.index(b)
+            y = self.evens.index(a)
+            return (y,x,"h")
         else:
-            o = "v"
-            c = self.evens.index(b)
-            r = self.odds.index(a)
-        return r, c, o
+            y = self.odds.index(a)
+            x = self.evens.index(b)
+            return (y,x,"v")
+
     def end_game(self):
         self.ended = True
 
 
-## MAIN EVENT LOOP
 
+
+## MAIN EVENT LOOP
 async def handler(websocket, path):
     logger.info("Start listening")
-    #   msg = await websocket.recv()
     game = None
+    # msg = await websocket.recv()
     try:
         async for msg in websocket:
             logger.info("< {}".format(msg))
