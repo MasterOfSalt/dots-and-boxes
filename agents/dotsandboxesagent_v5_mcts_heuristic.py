@@ -54,6 +54,9 @@ class DotsAndBoxesAgent:
         self.nodes = self.tree.tree['nodes']
         self.odds = []
         i = 0
+        self.mctsmoves = 0
+        self.heuristicmoves = 0
+        self.mcts = True
         while i<120:
             if(i%2!=0):
                 self.odds.append(i)
@@ -82,35 +85,37 @@ class DotsAndBoxesAgent:
         node = self.tree.fill_line(self.nodes,str(row)+","+str(column)+","+str(orientation))
         if node != False:
             self.nodes = node['children']
-        
+
     def next_action(self):
         """Return the next action this agent wants to perform.
 
         :return: (row, column, orientation)
         """
         free_lines = self.board.get_potential_moves()
-        print(free_lines)
         if len(free_lines) == 0:
             # Board full
+            print("HEURISTIC MOVES:",self.heuristicmoves)
+            print("MCTS MOVES:",self.mctsmoves)
             return None
         s = self.tree.get_best_move(self.nodes)
-        if not isinstance(s, str):
-            (a,b) = heuristics.always4never3(self.board)
+        if not isinstance(s, str) or self.mcts == False:
+            print("thinking about heuristics")
+            (a,b) = heuristics.find_good_move(self.board)
+            self.mcts = False
             if a%2==0:
                 o = "h"
                 c = b
                 r = int(a/2)
             else:
+
                 o = "v"
                 c = b
                 r = self.odds.index(a)
-            print("always4never3 en line: "+str(r)+", "+str(c)+", "+str(o))
+            self.heuristicmoves += 1
             return r, c, o
         else:
-            print("MCTS tree.data MOVE")
-            print("tree best move: "+s)
+            self.mctsmoves += 1
             r,c,o = s.split(",")
-            
             return r,c,o
 
 

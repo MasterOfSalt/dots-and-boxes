@@ -88,19 +88,14 @@ class DotsAndBoxesAgent:
 
         :return: (row, column, orientation)
         """
-        #Load Q-learning data
         Qedge = qlearning.loadfile(10)
         free_lines = self.board.get_potential_moves()
         if len(free_lines) == 0:
             # Board full
             return None
-        # last k moves are best possible, the rest is played by always4never3 strategy
         if len(free_lines) < 10:
             board_num = qlearning.board2num(self.board)
-            (a,b) = Qedge[len(free_lines)][str(board_num)]
-        else:
-            (a,b) = heuristics.always4never3(self.board)
-
+            (a,b,o) = Qedge[len(free_lines)][str(board_num)]
         if a%2==0:
             o = "h"
             c = b
