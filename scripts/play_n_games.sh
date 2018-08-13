@@ -46,11 +46,6 @@ if [ "$learner" == "L" ]; then
         echo "Started learning..."
         python3 ../agents/learner.py $R $C
         echo "done learning"
-    else
-        echo "data not learned"
-    fi
-=======
-    fi
 else
-    echo "Data not parsed"
+    echo "data not learned"
 fi
