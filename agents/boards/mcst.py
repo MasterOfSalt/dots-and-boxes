@@ -79,6 +79,9 @@ class MonteCarloSearchTree:
         rate = -1
         next_move = False
         for node in nodes:
+            if node["wins"] == 0 or node["plays"] == 0:
+                continue
+            else:
                 try:
                     value = (node["wins"]/node["plays"]) + sqrt(2)*sqrt(log(node["parentPlays"])/node["plays"])
                 except:

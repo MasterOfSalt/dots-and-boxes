@@ -10,7 +10,7 @@ of Hendrik Blockeel and Wannes Meert.
 
 Copyright (c) 2018 KU Leuven. All rights reserved.
 """
-import sys
+import sys,time
 import argparse
 import logging
 import asyncio
@@ -49,6 +49,7 @@ class DotsAndBoxesAgent:
         self.timelimit = timelimit
         self.ended = False
         self.board = Strings_board(nb_rows,nb_cols)
+        self.times_for_move = []
 
         self.odds = []
         i = 0
@@ -82,6 +83,7 @@ class DotsAndBoxesAgent:
 
         :return: (row, column, orientation)
         """
+        start_time = time.time()
         free_lines = self.board.get_potential_moves()
         if len(free_lines) == 0:
             # Board full
@@ -95,8 +97,14 @@ class DotsAndBoxesAgent:
             o = "v"
             c = b
             r = self.odds.index(a)
+        elapsed_time = time.time() - start_time
+        self.times_for_move.append(elapsed_time)
         return r, c, o
     def end_game(self):
+        time = 0
+        for t in self.times_for_move:
+            time += t
+        print("avg time v3 =",int(time)/len(self.times_for_move))
         self.ended = True
 
 

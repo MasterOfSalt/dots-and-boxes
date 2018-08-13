@@ -8,7 +8,7 @@ of Hendrik Blockeel and Wannes Meert.
 
 Copyright (c) 2018 KU Leuven. All rights reserved.
 """
-import sys
+import sys,time
 import argparse
 import logging
 import asyncio
@@ -47,7 +47,7 @@ class DotsAndBoxesAgent:
         self.timelimit = timelimit
         self.ended = False
         self.board = Board(nb_rows,nb_cols)
-
+        self.times_for_move = []
 
 
     def add_player(self, player):
@@ -71,7 +71,7 @@ class DotsAndBoxesAgent:
         """
         logger.info("Computing next move (grid={}x{}, player={})"\
                 .format(self.board.nb_rows, self.board.nb_cols, self.player))
-
+        start_time = time.time()
         free_lines = self.board.free_lines()
         if len(free_lines) == 0:
             # Board full
@@ -79,8 +79,14 @@ class DotsAndBoxesAgent:
         # Random move
         movei = random.randint(0, len(free_lines) - 1)
         r, c, o = free_lines[movei]
+        elapsed_time = time.time() - start_time
+        self.times_for_move.append(elapsed_time)
         return r, c, o
     def end_game(self):
+        time = 0
+        for t in self.times_for_move:
+            time += t
+        print("avg time v1 =",int(time)/len(self.times_for_move))
         self.ended = True
 
 
