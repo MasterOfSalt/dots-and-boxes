@@ -60,8 +60,7 @@ class DotsAndBoxesAgent:
         self.player.add(player)
 
     def register_action(self, row, column, orientation, player):
-        visited_lines = []
-        count_chains = self.board.count_chains()
+
 
         """
         Register action played in game.
@@ -74,6 +73,9 @@ class DotsAndBoxesAgent:
         if node != False:
             self.nodes = node['children']
         self.board.fill_line(row,column,orientation,player)
+        
+        visited_lines = []
+        count_chains = self.board.count_chains_v2()
 
     def next_action(self):
         """Return the next action this agent wants to perform.
@@ -93,6 +95,7 @@ class DotsAndBoxesAgent:
         if not isinstance(s, str):
             # Random move
             movei = random.randint(0, len(free_lines) - 1)
+            
             r, c, o = free_lines[movei]
             print("RANDOM MOVE MCTS")
             return r, c, o

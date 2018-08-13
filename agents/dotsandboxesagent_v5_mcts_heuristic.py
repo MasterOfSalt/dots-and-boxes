@@ -81,6 +81,7 @@ class DotsAndBoxesAgent:
         else:
             y = column
             x = self.odds[row]
+            
         self.board.fill_line(x,y)
         self.moves.append(str(row)+","+str(column)+","+str(orientation))
         node = self.tree.fill_line(self.nodes,str(row)+","+str(column)+","+str(orientation))
