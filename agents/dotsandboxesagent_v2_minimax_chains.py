@@ -2,7 +2,7 @@
 # encoding: utf-8
 from boards.coins_strings_board import Coins_strings_board
 import version2.alpha_beta_v1_score as abv1
-
+import time
 
 """
 dotsandboxesagent.py
@@ -54,6 +54,7 @@ class DotsAndBoxesAgent:
         self.board = Coins_strings_board(nb_rows+1,nb_cols+1)
         self.odds = []
         self.evens = []
+        self.times_for_move = []
 
         i = 0
         while i<120:
@@ -96,22 +97,31 @@ class DotsAndBoxesAgent:
         """
         # logger.info("Computing next move (grid={}x{}, player={})"\
         #         .format(self.board.nb_rows, self.board.nb_cols, self.player))
+        start_time = time.time()
 
         free_lines = self.board.free_lines()
         if len(free_lines) == 0:
             # Board full
             return None
-        (a,b,score) = abv1.alphabeta(self.board,depth = 2,player = list(self.player)[0])
+        (a,b,score) = abv1.alphabeta(self.board,depth = 4,player = list(self.player)[0])
         if a%2==0:
             x = self.odds.index(b)
             y = self.evens.index(a)
+            elapsed_time = time.time() - start_time
+            self.times_for_move.append(elapsed_time)
             return (y,x,"h")
         else:
             y = self.odds.index(a)
             x = self.evens.index(b)
+            elapsed_time = time.time() - start_time
+            self.times_for_move.append(elapsed_time)
             return (y,x,"v")
 
     def end_game(self):
+        time = 0
+        for t in self.times_for_move:
+            time += t
+        print("avg time v2 =",int(time)/len(self.times_for_move))
         self.ended = True
 
 

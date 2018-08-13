@@ -168,7 +168,7 @@ class DotsAndBoxesAgent:
                     c = b
                     r = self.odds.index(a)
                 return r, c, o
-        signal.alarm(5)
+        signal.alarm(self.timelimit)
         try:
             (a,b,score) = abv1.alphabeta(self.board2,10,player = list(self.player)[0])
             signal.alarm(0)

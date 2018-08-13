@@ -18,7 +18,7 @@ import asyncio
 import websockets
 import json
 from collections import defaultdict
-import random
+import random,time
 
 
 logger = logging.getLogger(__name__)
@@ -58,6 +58,7 @@ class DotsAndBoxesAgent:
         self.mctsmoves = 0
         self.heuristicmoves = 0
         self.mcts = True
+        self.times_for_move = []
         while i<120:
             if(i%2!=0):
                 self.odds.append(i)
@@ -94,6 +95,7 @@ class DotsAndBoxesAgent:
 
         :return: (row, column, orientation)
         """
+        start_time = time.time()
         free_lines = self.board.get_potential_moves()
         if len(free_lines) == 0:
             # Board full
@@ -112,16 +114,22 @@ class DotsAndBoxesAgent:
                 c = b
                 r = self.odds.index(a)
             self.heuristicmoves += 1
+            elapsed_time = time.time() - start_time
+            self.times_for_move.append(elapsed_time)
             return r, c, o
         else:
             self.mctsmoves += 1
             r,c,o = s.split(",")
+            elapsed_time = time.time() - start_time
+            self.times_for_move.append(elapsed_time)
             return r,c,o
 
 
     def end_game(self):
-        print("HEURISTIC MOVES:",self.heuristicmoves)
-        print("MCTS MOVES:",self.mctsmoves)
+        time = 0
+        for t in self.times_for_move:
+            time += t
+        print("avg time v3 =",int(time)/len(self.times_for_move))
         self.ended = True
 
 
